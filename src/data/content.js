@@ -1,5 +1,5 @@
 export const PF = "'Press Start 2P', monospace";
-export const SANS = "'Inter','Helvetica Neue',sans-serif";
+export const SANS = "'Space Grotesk', 'Helvetica Neue', sans-serif";
 
 export const ROOM_W = 960;
 export const ROOM_H = 600;
