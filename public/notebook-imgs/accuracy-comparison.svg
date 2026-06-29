@@ -1,0 +1,44 @@
+<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="background:#010409">
+
+  <!-- Y-axis gridlines -->
+  <line x1="60" y1="30" x2="380" y2="30" stroke="#21262d" stroke-width="1"/>
+  <line x1="60" y1="68" x2="380" y2="68" stroke="#21262d" stroke-width="1"/>
+  <line x1="60" y1="106" x2="380" y2="106" stroke="#21262d" stroke-width="1"/>
+  <line x1="60" y1="144" x2="380" y2="144" stroke="#21262d" stroke-width="1"/>
+  <line x1="60" y1="182" x2="380" y2="182" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Y-axis labels -->
+  <text x="52" y="33"  text-anchor="end" fill="#8b949e" font-size="10" font-family="monospace">100%</text>
+  <text x="52" y="71"  text-anchor="end" fill="#8b949e" font-size="10" font-family="monospace"> 75%</text>
+  <text x="52" y="109" text-anchor="end" fill="#8b949e" font-size="10" font-family="monospace"> 50%</text>
+  <text x="52" y="147" text-anchor="end" fill="#8b949e" font-size="10" font-family="monospace"> 25%</text>
+  <text x="52" y="185" text-anchor="end" fill="#8b949e" font-size="10" font-family="monospace">  0%</text>
+
+  <!-- Y-axis line -->
+  <line x1="60" y1="30" x2="60" y2="182" stroke="#30363d" stroke-width="1.5"/>
+
+  <!-- Baseline bar: 74.7% → height = 74.7/100 * 152 = 113.5px, top y = 182 - 113.5 = 68.5 -->
+  <rect x="100" y="69" width="80" height="113" fill="#374151" rx="3"/>
+
+  <!-- Augmented bar: 98.8% → height = 98.8/100 * 152 = 150.2px, top y = 182 - 150.2 = 31.8 -->
+  <rect x="240" y="32" width="80" height="150" fill="#0ea5e9" rx="3" opacity="0.9"/>
+
+  <!-- Percentage labels above bars -->
+  <text x="140" y="61" text-anchor="middle" fill="#8b949e" font-size="13" font-weight="700" font-family="monospace">74.7%</text>
+  <text x="280" y="25" text-anchor="middle" fill="#0ea5e9" font-size="13" font-weight="700" font-family="monospace">98.8%</text>
+
+  <!-- Delta arrow label -->
+  <text x="210" y="108" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700" font-family="monospace">+24.1 pp</text>
+  <line x1="185" y1="100" x2="145" y2="85" stroke="#22c55e" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="185" y1="100" x2="240" y2="58" stroke="#22c55e" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- X labels -->
+  <text x="140" y="200" text-anchor="middle" fill="#8b949e" font-size="11" font-family="monospace">Baseline CNN</text>
+  <text x="140" y="214" text-anchor="middle" fill="#6b7280" font-size="10" font-family="monospace">(no augmentation)</text>
+  <text x="280" y="200" text-anchor="middle" fill="#e6edf3" font-size="11" font-family="monospace">Augmented CNN</text>
+  <text x="280" y="214" text-anchor="middle" fill="#0ea5e9" font-size="10" font-family="monospace">(rotation + rendering aug.)</text>
+
+  <!-- Title -->
+  <text x="220" y="245" text-anchor="middle" fill="#6b7280" font-size="10" font-family="monospace">Field Accuracy — 5-Run Avg. (avg. of 5 independent runs)</text>
+
+</svg>
