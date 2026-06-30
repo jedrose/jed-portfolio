@@ -1,0 +1,69 @@
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" style="background:#010409">
+
+  <!-- Header bar -->
+  <rect x="0" y="0" width="760" height="48" fill="#0d1117"/>
+  <rect x="0" y="0" width="760" height="2" fill="#2563eb"/>
+  <text x="20" y="30" fill="#e6edf3" font-size="13" font-weight="700" font-family="'Space Grotesk', sans-serif">PFF</text>
+  <text x="48" y="30" fill="#8b949e" font-size="12" font-family="'Space Grotesk', sans-serif">Games</text>
+  <text x="100" y="30" fill="#2563eb" font-size="12" font-weight="600" font-family="'Space Grotesk', sans-serif">Player Props</text>
+  <text x="190" y="30" fill="#8b949e" font-size="12" font-family="'Space Grotesk', sans-serif">Key Insights</text>
+  <rect x="96" y="41" width="80" height="2" rx="1" fill="#2563eb"/>
+
+  <!-- Column headers -->
+  <text x="20" y="72" fill="#6b7280" font-size="10" font-family="'Space Grotesk', sans-serif" font-weight="600">MATCHUP</text>
+  <text x="240" y="72" fill="#6b7280" font-size="10" font-family="'Space Grotesk', sans-serif" font-weight="600">HIT RATE</text>
+  <text x="380" y="72" fill="#6b7280" font-size="10" font-family="'Space Grotesk', sans-serif" font-weight="600">COVER PROB</text>
+  <text x="530" y="72" fill="#6b7280" font-size="10" font-family="'Space Grotesk', sans-serif" font-weight="600">EDGE</text>
+  <line x1="0" y1="78" x2="760" y2="78" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Row 1: Edge +21% - green highlight -->
+  <rect x="0" y="78" width="760" height="60" fill="#0d2818"/>
+  <rect x="0" y="78" width="4" height="60" fill="#22c55e"/>
+  <text x="20" y="103" fill="#e6edf3" font-size="13" font-weight="700" font-family="'Space Grotesk', sans-serif">Mike Evans</text>
+  <text x="20" y="120" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">Rec Yds u 85.5  +120</text>
+  <rect x="155" y="88" width="60" height="22" rx="4" fill="#22c55e22" stroke="#22c55e" stroke-width="1"/>
+  <text x="185" y="103" fill="#22c55e" font-size="10" font-weight="700" font-family="'Space Grotesk', sans-serif" text-anchor="middle">GREAT</text>
+  <text x="248" y="103" fill="#e6edf3" font-size="16" font-weight="700" font-family="'Space Grotesk', sans-serif">5/10</text>
+  <text x="248" y="120" fill="#8b949e" font-size="10" font-family="'Space Grotesk', sans-serif">Over Hit Rate</text>
+  <text x="388" y="103" fill="#e6edf3" font-size="16" font-weight="700" font-family="'Space Grotesk', sans-serif">71%</text>
+  <text x="388" y="120" fill="#8b949e" font-size="10" font-family="'Space Grotesk', sans-serif">Cover Probability</text>
+  <rect x="520" y="88" width="70" height="26" rx="4" fill="#22c55e22" stroke="#22c55e44" stroke-width="1"/>
+  <text x="555" y="104" fill="#22c55e" font-size="12" font-weight="700" font-family="'Space Grotesk', sans-serif" text-anchor="middle">+21%</text>
+  <line x1="0" y1="138" x2="760" y2="138" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Row 2: Edge +8% -->
+  <rect x="0" y="138" width="760" height="60" fill="#0d1117"/>
+  <rect x="0" y="138" width="4" height="60" fill="#22c55e"/>
+  <text x="20" y="163" fill="#e6edf3" font-size="13" font-weight="700" font-family="'Space Grotesk', sans-serif">Kahlil Shakir</text>
+  <text x="20" y="180" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">Rec Yds o 55.5  -120</text>
+  <rect x="155" y="148" width="60" height="22" rx="4" fill="#22c55e22" stroke="#22c55e" stroke-width="1"/>
+  <text x="185" y="163" fill="#22c55e" font-size="10" font-weight="700" font-family="'Space Grotesk', sans-serif" text-anchor="middle">GREAT</text>
+  <text x="248" y="163" fill="#e6edf3" font-size="16" font-weight="700" font-family="'Space Grotesk', sans-serif">7/10</text>
+  <text x="248" y="180" fill="#8b949e" font-size="10" font-family="'Space Grotesk', sans-serif">Over Hit Rate</text>
+  <text x="388" y="163" fill="#e6edf3" font-size="16" font-weight="700" font-family="'Space Grotesk', sans-serif">65%</text>
+  <text x="388" y="180" fill="#8b949e" font-size="10" font-family="'Space Grotesk', sans-serif">Cover Probability</text>
+  <rect x="520" y="148" width="70" height="26" rx="4" fill="#22c55e22" stroke="#22c55e44" stroke-width="1"/>
+  <text x="555" y="164" fill="#22c55e" font-size="12" font-weight="700" font-family="'Space Grotesk', sans-serif" text-anchor="middle">+8%</text>
+  <line x1="0" y1="198" x2="760" y2="198" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Row 3: Edge -11% - red -->
+  <rect x="0" y="198" width="760" height="60" fill="#0d1117"/>
+  <rect x="0" y="198" width="4" height="60" fill="#ef4444"/>
+  <text x="20" y="223" fill="#e6edf3" font-size="13" font-weight="700" font-family="'Space Grotesk', sans-serif">DeVonta Smith</text>
+  <text x="20" y="240" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">Rec o 3.5  -145</text>
+  <rect x="155" y="208" width="60" height="22" rx="4" fill="#ef444422" stroke="#ef4444" stroke-width="1"/>
+  <text x="185" y="223" fill="#ef4444" font-size="10" font-weight="700" font-family="'Space Grotesk', sans-serif" text-anchor="middle">POOR</text>
+  <text x="248" y="223" fill="#e6edf3" font-size="16" font-weight="700" font-family="'Space Grotesk', sans-serif">5/10</text>
+  <text x="248" y="240" fill="#8b949e" font-size="10" font-family="'Space Grotesk', sans-serif">Over Hit Rate</text>
+  <text x="388" y="223" fill="#e6edf3" font-size="16" font-weight="700" font-family="'Space Grotesk', sans-serif">48%</text>
+  <text x="388" y="240" fill="#8b949e" font-size="10" font-family="'Space Grotesk', sans-serif">Cover Probability</text>
+  <rect x="520" y="208" width="70" height="26" rx="4" fill="#ef444422" stroke="#ef444444" stroke-width="1"/>
+  <text x="555" y="224" fill="#ef4444" font-size="12" font-weight="700" font-family="'Space Grotesk', sans-serif" text-anchor="middle">-11%</text>
+  <line x1="0" y1="258" x2="760" y2="258" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Footer -->
+  <rect x="0" y="258" width="760" height="42" fill="#0d1117"/>
+  <text x="20" y="283" fill="#6b7280" font-size="10" font-family="'Space Grotesk', sans-serif">PFF Player Prop Tool · Trusted by all 32 NFL teams · $160M sports analytics</text>
+  <text x="680" y="283" fill="#2563eb" font-size="10" font-weight="700" font-family="'Space Grotesk', sans-serif">PFF+</text>
+
+</svg>

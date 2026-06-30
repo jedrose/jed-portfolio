@@ -83,19 +83,19 @@ export default function ProjectsSection({ color, onClose }) {
                   borderRadius: 4, padding: "2px 8px",
                   fontFamily: PF, fontSize: 5, color: p.coverColor, letterSpacing: "0.1em",
                 }}>
-                  ML / AI
+                  {p.category || "ML / AI"}
                 </div>
               </div>
 
               {/* Card body */}
-              <div style={{ padding: "1.125rem 1.25rem" }}>
-                <div style={{ fontSize: 14, fontWeight: 700, color: TEXT_PRIMARY, marginBottom: 5, lineHeight: 1.4 }}>
+              <div style={{ padding: "1.25rem 1.375rem" }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: TEXT_PRIMARY, marginBottom: 8, lineHeight: 1.45 }}>
                   {p.title}
                 </div>
-                <div style={{ fontFamily: PF, fontSize: 5, color: p.coverColor, letterSpacing: "0.1em", marginBottom: 8 }}>
+                <div style={{ fontFamily: PF, fontSize: 5.5, color: p.coverColor, letterSpacing: "0.08em", marginBottom: 12, lineHeight: 1.6 }}>
                   {p.subtitle}
                 </div>
-                <p style={{ fontSize: 12, color: TEXT_MUTED, lineHeight: 1.65, margin: "0 0 10px" }}>{p.blurb}</p>
+                <p style={{ fontSize: 12.5, color: TEXT_MUTED, lineHeight: 1.75, margin: "0 0 14px" }}>{p.blurb}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginBottom: 10 }}>
                   {p.tags.slice(0, 4).map(t => (
                     <span key={t} style={{

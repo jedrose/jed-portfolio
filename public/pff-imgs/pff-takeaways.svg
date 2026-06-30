@@ -1,0 +1,30 @@
+<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" style="background:#010409">
+
+  <!-- Top label -->
+  <rect x="20" y="20" width="420" height="2" rx="1" fill="#2563eb"/>
+  <text x="20" y="44" fill="#2563eb" font-size="9" font-weight="700" font-family="monospace" letter-spacing="2">PFF - WHAT WE LEARNED</text>
+
+  <!-- Card 1: Knowing Your User -->
+  <rect x="20" y="56" width="420" height="100" rx="6" fill="#161b22" stroke="#21262d" stroke-width="1"/>
+  <rect x="20" y="56" width="4" height="100" rx="2" fill="#2563eb"/>
+  <text x="38" y="78" fill="#e6edf3" font-size="12" font-weight="700" font-family="'Space Grotesk', sans-serif">Knowing Your User is Crucial</text>
+  <text x="38" y="97" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">Understanding who the product is really for - what alternatives</text>
+  <text x="38" y="112" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">they have and what gaps they need filled - is non-negotiable.</text>
+  <text x="38" y="129" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">Fantasy users wanted simpler onboarding; bettors needed context.</text>
+  <text x="38" y="144" fill="#6b7280" font-size="10" font-style="italic" font-family="'Space Grotesk', sans-serif">Required full landscape mapping across all user personas.</text>
+
+  <!-- Card 2: Threading the Needle -->
+  <rect x="20" y="170" width="420" height="110" rx="6" fill="#161b22" stroke="#21262d" stroke-width="1"/>
+  <rect x="20" y="170" width="4" height="110" rx="2" fill="#2563eb"/>
+  <text x="38" y="192" fill="#e6edf3" font-size="12" font-weight="700" font-family="'Space Grotesk', sans-serif">Threading the Needle</text>
+  <text x="38" y="211" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">PFF's core challenge: serve casual players who need guidance</text>
+  <text x="38" y="226" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">and competitive players who want advanced data - simultaneously.</text>
+  <text x="38" y="241" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">Aligned feature strategy to leverage PFF's data strengths</text>
+  <text x="38" y="256" fill="#8b949e" font-size="11" font-family="'Space Grotesk', sans-serif">for both segments without alienating either.</text>
+  <rect x="38" y="268" width="100" height="1" fill="#21262d"/>
+  <text x="38" y="280" fill="#2563eb" font-size="10" font-weight="700" font-family="'Space Grotesk', sans-serif">Differentiation</text>
+  <text x="148" y="280" fill="#6b7280" font-size="10" font-family="'Space Grotesk', sans-serif">+</text>
+  <text x="162" y="280" fill="#2563eb" font-size="10" font-weight="700" font-family="'Space Grotesk', sans-serif">Usability</text>
+  <text x="224" y="280" fill="#6b7280" font-size="10" font-family="'Space Grotesk', sans-serif">= the core balance</text>
+
+</svg>

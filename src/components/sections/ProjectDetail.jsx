@@ -51,14 +51,21 @@ export default function ProjectDetail({ project, onBack }) {
             background: `linear-gradient(to top, ${DARK} 0%, ${DARK}88 40%, transparent 100%)`,
           }} />
           <div style={{ position: "absolute", bottom: 0, left: 0, padding: "1.5rem 2rem" }}>
-            <div style={{ fontFamily: PF, fontSize: 6, color: c, letterSpacing: "0.14em", marginBottom: 10 }}>
-              {project.subtitle}
-            </div>
             <div style={{ fontSize: 22, fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.3, letterSpacing: "-0.01em" }}>
               {project.title}
             </div>
           </div>
         </div>
+
+        {/* Subtitle + blurb under hero */}
+        <div style={{ fontFamily: PF, fontSize: 6, color: project.coverColor, letterSpacing: "0.1em", marginBottom: 12 }}>
+          {project.subtitle}
+        </div>
+        {project.blurb && (
+          <p style={{ fontSize: 15, color: TEXT_PRIMARY, lineHeight: 1.85, margin: "0 0 2rem", opacity: 0.85 }}>
+            {project.blurb}
+          </p>
+        )}
 
         {/* Tags */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: "2rem" }}>
@@ -77,19 +84,21 @@ export default function ProjectDetail({ project, onBack }) {
           <p style={{ fontSize: 15, color: TEXT_MUTED, lineHeight: 1.85, margin: 0 }}>{project.context}</p>
         </div>
 
-        {/* Tech stack */}
-        <div style={{ marginBottom: "2rem" }}>
-          <SectionLabel color={c}>TECH STACK</SectionLabel>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-            {project.techStack.map(t => (
-              <span key={t} style={{
-                fontSize: 12, padding: "5px 14px",
-                background: CARD, border: `1px solid ${BORDER}`,
-                borderRadius: 6, color: TEXT_PRIMARY, fontWeight: 500,
-              }}>{t}</span>
-            ))}
+        {/* Tech stack - only shown when project has one */}
+        {project.techStack?.length > 0 && (
+          <div style={{ marginBottom: "2rem" }}>
+            <SectionLabel color={c}>TECH STACK</SectionLabel>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+              {project.techStack.map(t => (
+                <span key={t} style={{
+                  fontSize: 12, padding: "5px 14px",
+                  background: CARD, border: `1px solid ${BORDER}`,
+                  borderRadius: 6, color: TEXT_PRIMARY, fontWeight: 500,
+                }}>{t}</span>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Core impact */}
         <div style={{ marginBottom: "2rem" }}>
@@ -119,35 +128,45 @@ export default function ProjectDetail({ project, onBack }) {
             {s.images && s.images.length > 0 && (
               <div style={{
                 display: "grid",
-                gridTemplateColumns: s.images.length === 1 ? "1fr" : "1fr 1fr",
+                gridTemplateColumns: s.images.length === 1 && project.images[s.images[0]]?.fullWidth ? "1fr" : s.images.length === 1 ? "1fr" : "1fr 1fr",
                 gap: "0.875rem",
                 marginBottom: "1.25rem",
               }}>
                 {s.images.map(imgIdx => {
                   const img = project.images[imgIdx];
+                  if (img.fullWidth) {
+                    return (
+                      <img
+                        key={imgIdx}
+                        src={img.src}
+                        alt=""
+                        style={{ width: "100%", display: "block", borderRadius: 8 }}
+                      />
+                    );
+                  }
+                  const isPaired = s.images.length > 1;
                   return (
-                    <figure key={imgIdx} style={{ margin: 0 }}>
-                      <div style={{
-                        background: "#010409",
-                        border: `1px solid ${BORDER}`,
-                        borderRadius: 8, overflow: "hidden",
-                        height: 220,
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                      }}>
-                        <img
-                          src={img.src}
-                          alt={img.caption}
-                          style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-                        />
-                      </div>
-                      <figcaption style={{
-                        fontSize: 11, color: TEXT_MUTED,
-                        marginTop: 6, lineHeight: 1.5, paddingLeft: 2,
-                        fontStyle: "italic",
-                      }}>
-                        {img.caption}
-                      </figcaption>
-                    </figure>
+                    <div key={imgIdx} style={{
+                      border: `1px solid ${BORDER}`,
+                      borderRadius: 8, overflow: "hidden",
+                      height: isPaired ? 380 : (img.contain ? "auto" : 220),
+                      minHeight: !isPaired && img.contain ? 180 : undefined,
+                      background: DARK,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
+                      <img
+                        src={img.src}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: isPaired ? "100%" : (img.contain ? "auto" : "100%"),
+                          objectFit: img.contain ? "contain" : "cover",
+                          objectPosition: "center",
+                          display: "block",
+                          borderRadius: 7,
+                        }}
+                      />
+                    </div>
                   );
                 })}
               </div>
@@ -172,6 +191,30 @@ export default function ProjectDetail({ project, onBack }) {
             )}
           </div>
         ))}
+
+        {/* Client quote */}
+        {project.clientQuote && (
+          <div style={{
+            margin: "1rem 0 0",
+            padding: "2rem 2rem 2rem 2.5rem",
+            borderLeft: `3px solid ${c}`,
+            background: CARD,
+            borderRadius: "0 8px 8px 0",
+          }}>
+            <p style={{
+              fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.8,
+              fontStyle: "italic", margin: "0 0 1rem",
+            }}>
+              "{project.clientQuote.text}"
+            </p>
+            <div style={{ fontFamily: PF, fontSize: 6, color: c, letterSpacing: "0.1em" }}>
+              {project.clientQuote.author}
+            </div>
+            <div style={{ fontSize: 12, color: TEXT_MUTED, marginTop: 4 }}>
+              {project.clientQuote.role}
+            </div>
+          </div>
+        )}
 
       </div>
     </div>

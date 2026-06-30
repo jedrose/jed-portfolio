@@ -1,0 +1,33 @@
+<svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg" style="background:#010409">
+
+  <!-- Top accent line -->
+  <rect x="20" y="20" width="420" height="2" rx="1" fill="#2563eb"/>
+
+  <!-- Label -->
+  <text x="20" y="46" fill="#2563eb" font-size="9" font-weight="700" font-family="monospace" letter-spacing="2">WHAT PFF HAS TO SAY</text>
+
+  <!-- Quote 1 -->
+  <text x="20" y="76" fill="#6b7280" font-size="22" font-family="'Space Grotesk', sans-serif">"</text>
+  <text x="36" y="76" fill="#e6edf3" font-size="12" font-family="'Space Grotesk', sans-serif">This is the fastest we have been able to</text>
+  <text x="36" y="92" fill="#e6edf3" font-size="12" font-family="'Space Grotesk', sans-serif">iterate on a product in a long time.</text>
+  <line x1="20" y1="104" x2="440" y2="104" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Quote 2 -->
+  <text x="20" y="128" fill="#6b7280" font-size="22" font-family="'Space Grotesk', sans-serif">"</text>
+  <text x="36" y="128" fill="#e6edf3" font-size="12" font-family="'Space Grotesk', sans-serif">If we did not do this work the right way,</text>
+  <text x="36" y="144" fill="#e6edf3" font-size="12" font-family="'Space Grotesk', sans-serif">I feel like that would have lost the day for us.</text>
+  <line x1="20" y1="156" x2="440" y2="156" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Quote 3 -->
+  <text x="20" y="180" fill="#6b7280" font-size="22" font-family="'Space Grotesk', sans-serif">"</text>
+  <text x="36" y="180" fill="#e6edf3" font-size="12" font-family="'Space Grotesk', sans-serif">The deeper level interviews, the different</text>
+  <text x="36" y="196" fill="#e6edf3" font-size="12" font-family="'Space Grotesk', sans-serif">personas -- all of that rich detail helps us</text>
+  <text x="36" y="212" fill="#e6edf3" font-size="12" font-family="'Space Grotesk', sans-serif">move faster.</text>
+
+  <!-- Attribution -->
+  <rect x="20" y="234" width="420" height="1" fill="#21262d"/>
+  <text x="20" y="258" fill="#8b949e" font-size="11" font-weight="600" font-family="'Space Grotesk', sans-serif">Marty Styles</text>
+  <text x="110" y="258" fill="#374151" font-size="11" font-family="'Space Grotesk', sans-serif">VP of Product, Pro Football Focus</text>
+  <rect x="20" y="264" width="60" height="2" rx="1" fill="#2563eb"/>
+
+</svg>
