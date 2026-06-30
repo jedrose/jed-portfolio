@@ -46,7 +46,8 @@ export default function ProjectsSection({ color, onClose }) {
                 textAlign: "left",
                 transition: "border-color 0.2s, box-shadow 0.2s, transform 0.2s",
                 overflow: "hidden",
-                minHeight: 44,
+                display: "flex",
+                flexDirection: "column",
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.borderColor = p.coverColor;
@@ -70,7 +71,7 @@ export default function ProjectsSection({ color, onClose }) {
                 <img
                   src={p.coverImage}
                   alt={`Cover image for ${p.title}`}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: 0.85 }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: p.coverPosition || "center", display: "block", opacity: 0.85 }}
                 />
                 <div style={{
                   position: "absolute", inset: 0,
@@ -88,7 +89,7 @@ export default function ProjectsSection({ color, onClose }) {
               </div>
 
               {/* Card body */}
-              <div style={{ padding: "1.25rem 1.375rem" }}>
+              <div style={{ padding: "1.25rem 1.375rem", flex: 1, display: "flex", flexDirection: "column" }}>
                 <div style={{ fontSize: 14, fontWeight: 700, color: TEXT_PRIMARY, marginBottom: 8, lineHeight: 1.45 }}>
                   {p.title}
                 </div>

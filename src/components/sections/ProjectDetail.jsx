@@ -44,7 +44,7 @@ export default function ProjectDetail({ project, onBack }) {
           <img
             src={project.coverImage}
             alt={`Cover image: ${project.title}`}
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: project.coverPosition || "center", display: "block" }}
           />
           <div style={{
             position: "absolute", inset: 0,
@@ -169,6 +169,35 @@ export default function ProjectDetail({ project, onBack }) {
                     </div>
                   );
                 })}
+              </div>
+            )}
+
+            {/* Live demo embed */}
+            {s.liveDemo && project.liveDemo && (
+              <div style={{ marginBottom: "1.25rem" }}>
+                <div style={{ fontFamily: PF, fontSize: 6, color: c, letterSpacing: "0.12em", marginBottom: 12 }}>
+                  — TRY IT LIVE
+                </div>
+                <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden", boxShadow: `0 4px 24px #00000055` }}>
+                  {/* Browser chrome */}
+                  <div style={{ background: "#080c10", borderBottom: `1px solid ${BORDER}`, padding: "9px 14px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <span style={{ fontSize: 11, color: TEXT_MUTED, fontFamily: "inherit" }}>{project.liveDemo.label}</span>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      <div style={{ width: 11, height: 11, borderRadius: "50%", background: "#ff5f57" }} />
+                      <div style={{ width: 11, height: 11, borderRadius: "50%", background: "#febc2e" }} />
+                      <div style={{ width: 11, height: 11, borderRadius: "50%", background: "#28c840" }} />
+                    </div>
+                  </div>
+                  <iframe
+                    src={project.liveDemo.src}
+                    title={project.liveDemo.title}
+                    style={{ width: "100%", height: 600, border: "none", display: "block", background: "#fff" }}
+                    allow="autoplay"
+                  />
+                </div>
+                <div style={{ fontSize: 11, color: TEXT_MUTED, marginTop: 8, textAlign: "center" }}>
+                  Fully interactive — click through the onboarding and dashboard.
+                </div>
               </div>
             )}
 

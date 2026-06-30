@@ -42,6 +42,72 @@ export const PROJECTS_DATA = [
 
 export const DEEP_PROJECTS = [
   {
+    id: "capitol-ai",
+    title: "Capitol AI: Product Strategy, UX Research & AI Workflows",
+    subtitle: "Ascend Consulting Group · 3 Engagements · 2024-25",
+    coverColor: "#2563eb",
+    coverImage: "/capitol-ai-imgs/ACG x Capitol AI.png",
+    category: "CONSULTING / PM",
+    tags: ["Product Management", "UX Research", "AI Workflows", "Frontend Dev", "Figma"],
+    blurb: "3 consecutive engagements with a YC-backed AI startup. Progressed from Co-PM to Head PM to Strategic Lead, running 100+ user interviews, building a live frontend demo, and owning platform strategy for Capitol AI's Workflow Composer.",
+    context: "Capitol AI is a YC-backed startup building an enterprise AI workflow composer that lets teams generate slide decks, automate tasks, and build multi-agent pipelines on live data. Engaged through Ascend Consulting Group across three consecutive projects, serving as the main client POC throughout. Progressed from Co-PM on use case research to Head PM on onboarding UX to Strategic Lead on platform differentiation and MCP integration.",
+    techStack: ["HTML", "CSS", "JavaScript", "Canvas API", "Figma"],
+    clientQuote: null,
+    impact: [
+      "Built and shipped a live frontend demo (Stockflow Tracker) as a proof-of-concept for Capitol AI's Workflow Composer — fully functional onboarding flow and AI-powered investment dashboard",
+      "100+ user interviews across the Training Academy onboarding: surfaced module-by-module friction points and delivered structured UX reports that directly shaped platform improvements",
+      "Investigated and scoped MCP tool integration to connect Capitol AI with external platforms. Competitive analysis against n8n, CrewAI, Langdock, and Lindy with a full differentiation strategy",
+    ],
+    images: [
+      { src: "/capitol-ai-imgs/recap_image10.png", contain: true },   // 0 - login screen
+      { src: "/capitol-ai-imgs/recap_image5.png", contain: true },    // 1 - dashboard
+      { src: "/capitol-ai-imgs/recap_image7.png", contain: true },    // 2 - onboarding preferences
+      { src: "/capitol-ai-imgs/recap_image6.png", contain: true },    // 3 - connect accounts
+      { src: "/capitol-ai-imgs/recap_image8.png", contain: true },    // 4 - Cappy chatbot
+      { src: "/capitol-ai-imgs/recap_image12.png", contain: true },   // 5 - Stockflow AI workflow
+      { src: "/capitol-ai-imgs/deliverable_image11.png", contain: true }, // 6 - Capitol AI platform
+      { src: "/capitol-ai-imgs/deliverable_image19.png", contain: true }, // 7 - workflow nodes (EY)
+      { src: "/capitol-ai-imgs/deliverable_image24.png", contain: true }, // 8 - LinkedIn workflow
+      { src: "/capitol-ai-imgs/deliverable_image25.png", contain: true }, // 9 - MCP/resume workflow
+    ],
+    githubUrl: "https://github.com/Kanishkkandoi52/Stockflow_Tracker",
+    liveDemo: {
+      src: "/stockflow/index.html",
+      title: "Stockflow Tracker — Live Demo",
+      label: "STOCKFLOW TRACKER — DEMO (simulated data)",
+    },
+    sections: [
+      {
+        heading: "The Client and the Problem",
+        body: "Capitol AI is a YC-backed startup building an enterprise AI workflow composer: a platform that lets teams build on live data, chain multi-agent reasoning, and generate layout-first outputs like slide decks, spreadsheets, and reports. The platform was technically impressive, but getting new users to that first moment of value was genuinely hard. The onboarding was steep, the use cases weren't obvious, and the product didn't yet have a clear identity in a crowded market of tools like n8n, CrewAI, and Langdock. My role across three engagements was to close those gaps.",
+      },
+      {
+        heading: "Engagement 1: Use Cases, Workflows & Stockflow Tracker",
+        body: "The first engagement started with a question: what should Capitol AI actually be used for? We brainstormed and scoped 8+ use cases: a LinkedIn networking tool, a healthcare assistant, a casing prep tool, an exam simulator, and more. For each, we built wireframes and mockups. Then we went further. I co-led the design and development of Stockflow Tracker with my Co-PM as a proof-of-concept demo to show Capitol AI exactly what their Workflow Composer platform could power. I owned the overall UI design, onboarding flow architecture, and Cappy chatbot integration. My Co-PM and I split the build, collaborated on the dashboard logic and data layer, and shipped a working frontend. Stock data and AI responses are simulated for demo purposes. We also built the Capitol AI workflows behind it: a stock research agent, a contact reminder tool, and a LinkedIn job finder. Try the demo below.",
+        liveDemo: true,
+      },
+      {
+        heading: "Cappy: Designing the Capitol AI Chatbot",
+        body: "One of the most distinct things we built was Cappy, the Capitol AI chatbot. I designed Cappy as a character — a friendly blue robot persona that would give the platform a human face and make the onboarding feel less like reading documentation and more like getting help from someone who knew the product. Cappy was integrated into the Stockflow Tracker as the primary interface for market questions and portfolio guidance. The idea was simple: if a user doesn't know where to start, give them something they can just talk to.",
+        images: [4],
+      },
+      {
+        heading: "Engagement 2: Onboarding UX & Training Academy",
+        body: "For the second engagement I moved into Head PM. Capitol AI had built a Training Academy to walk new users through the platform, and we ran 100+ user interviews to evaluate it module by module. The findings were detailed and structural: users felt overwhelmed by the volume of content, the audio felt robotic, the interactive and video portions were redundant, and expert vs. beginner users needed completely different paths. We delivered module-by-module UX reports, bug documentation, a full user manual, and a document of use case ideas to help the team prioritize. The central recommendation: segment users upfront so the experience matched their skill level from the first screen.",
+        images: [6, 5],
+      },
+      {
+        heading: "Engagement 3: AI Workflows & Differentiation Strategy",
+        body: "As Strategic Lead on the third engagement, the work got more technical. We built complex AI workflows directly on the Capitol AI platform: a LinkedIn job finder, a resume improver with live web search, a connection outreach reminder tool, and a casing prep agent. We also investigated MCP tool integration, scoping how Capitol AI could let users connect to external platforms with a single connection. On the strategy side, we ran a competitive analysis against n8n, CrewAI, Langdock, and Lindy. Every competitor was converging on the same raw capability. The differentiator had to be ease of entry for non-technical users, and we built the recommendations around that.",
+        images: [7, 8],
+      },
+      {
+        heading: "What I Took Away",
+        body: "Capitol AI was the project that made it click for me: technically impressive does not mean immediately usable. The Workflow Composer could do things most enterprise tools couldn't. But none of that mattered if someone felt lost in the first five minutes. Every engagement came back to the same question: how do you make something powerful feel approachable? You don't simplify the product. You simplify the first experience. That's what the Stockflow demo was showing, what Cappy was solving for, what the Training Academy research was fixing, and what the differentiation strategy was protecting.",
+      },
+    ],
+  },
+  {
     id: "pff",
     title: "Pro Football Focus: Product Strategy & UX Research",
     subtitle: "Ascend Consulting Group · 3 Engagements · 2025-26",
@@ -95,7 +161,8 @@ export const DEEP_PROJECTS = [
     title: "Robust Deep Learning for Pneumonia Detection",
     subtitle: "MIT Inspirit AI Program · 2023",
     coverColor: "#0ea5e9",
-    coverImage: "/notebook-imgs/s3_cell29_img28.png",
+    coverImage: "/notebook-imgs/s3_cell22_img12.png",
+    coverPosition: "center 65%",
     category: "ML / AI",
     tags: ["TensorFlow", "Keras", "CNN", "Python", "imgaug"],
     blurb: "Solved out-of-distribution generalization in a clinical CNN, lifting field accuracy from 74.7% to 98.8% by engineering rotation and rendering-shift augmentation into the training pipeline. No new labeled data required.",
