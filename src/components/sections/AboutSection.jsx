@@ -89,6 +89,8 @@ export default function AboutSection({ color, onClose }) {
               { src: "/photos/backpacking.png", alt: "Backpacking at Olympic National Park" },
               { src: "/photos/florence.png", alt: "Florence, Italy — Duomo" },
               { src: "/photos/camping.png", alt: "Hammock camping" },
+              { src: "/photos/hackathon photo.jpg", alt: "Hackathon" },
+              { src: "/photos/car.jpg", alt: "EVR autocross racing" },
               { src: "/photos/mdt group photo.jpg", alt: "Michigan Defense Technology" },
               { src: "/photos/michigan national chip.png", alt: "Michigan National Championship" },
               { src: "/photos/EVR pic.png", alt: "EVR" },
