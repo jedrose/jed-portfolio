@@ -96,18 +96,16 @@ export default function ResumeSection({ color, onClose }) {
             </div>
           </div>
 
-          {/* PDF iframe */}
-          <iframe
+          {/* PDF embed */}
+          <embed
             src={RESUME_PDF_URL}
-            title="Jedidiah Roseman Resume"
+            type="application/pdf"
             style={{
               width: "100%",
               height: 780,
               border: "none",
               display: "block",
-              background: "#fff",
             }}
-            allow="autoplay"
           />
         </div>
 
