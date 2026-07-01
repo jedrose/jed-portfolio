@@ -7,9 +7,6 @@ const BORDER = "#21262d";
 const TEXT_PRIMARY = "#e6edf3";
 const TEXT_MUTED = "#8b949e";
 
-const DRIVE_FILE_ID = "1tXiM_2PJLgHh0EB_ydwqBMF7IYnbViMy";
-const PREVIEW_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/preview`;
-
 export default function ResumeSection({ color, onClose }) {
   return (
     <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
@@ -51,7 +48,7 @@ export default function ResumeSection({ color, onClose }) {
             DOWNLOAD PDF
           </a>
           <a
-            href={`https://drive.google.com/file/d/${DRIVE_FILE_ID}/view`}
+            href={RESUME_PDF_URL}
             target="_blank"
             rel="noreferrer"
             style={{
@@ -90,7 +87,7 @@ export default function ResumeSection({ color, onClose }) {
             justifyContent: "space-between",
           }}>
             <span style={{ fontSize: 12, color: TEXT_MUTED, fontFamily: SANS }}>
-              Jedidiah Roseman - Resume 2025
+              Jedidiah Roseman - Resume 2026
             </span>
             <div style={{ display: "flex", gap: 7 }}>
               <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#ff5f57" }} />
@@ -101,7 +98,7 @@ export default function ResumeSection({ color, onClose }) {
 
           {/* PDF iframe */}
           <iframe
-            src={PREVIEW_URL}
+            src={RESUME_PDF_URL}
             title="Jedidiah Roseman Resume"
             style={{
               width: "100%",
