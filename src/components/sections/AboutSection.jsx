@@ -35,13 +35,13 @@ export default function AboutSection({ color, onClose }) {
           <SectionLabel color={color}>INTRO</SectionLabel>
           <p style={{ fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.85, margin: 0, fontWeight: 400 }}>
             Hey, I&#39;m Jed Roseman, a sophomore at the University of Michigan studying Electrical Engineering.
-            I&#39;m passionate about defense technology, venture, and building things that matter. Whether I&#39;m
-            running Michigan Defense Technology, advising startups, or wiring up a motor drivetrain, I&#39;m always
-            working at the intersection of technical depth and real-world impact.
+            I&#39;m passionate about deep tech, defense, and startups, and always looking to deepen my technical skillset.
+            Whether I&#39;m running Michigan Defense Technology, advising startups, or wiring up a motor drivetrain, I&#39;m always
+            working at the intersection of technical depth, product thinking, and real-world impact.
           </p>
           <p style={{ fontSize: 16, color: TEXT_MUTED, lineHeight: 1.85, margin: "1.25rem 0 0", fontWeight: 400 }}>
-            My goal is to work on hard problems in national security, deep tech, and emerging industries.
-            Eventually founding or leading ventures that push the frontier. I care about execution, not just ideas.
+            My goal is to work on hard problems in national security, deep tech, and emerging industries, orchestrating
+            the ideas, people, and execution that turn them into ventures. I care about ownership and getting things built, not just ideas.
           </p>
         </div>
 
