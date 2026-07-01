@@ -98,7 +98,7 @@ export default function ResumeSection({ color, onClose }) {
 
           {/* PDF embed */}
           <embed
-            src={RESUME_PDF_URL}
+            src={`${RESUME_PDF_URL}#toolbar=0&navpanes=0&scrollbar=0`}
             type="application/pdf"
             style={{
               width: "100%",
