@@ -232,8 +232,7 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
   },
 ];
 
-export const RESUME_PDF_URL =
-  "https://drive.google.com/uc?export=download&id=1tXiM_2PJLgHh0EB_ydwqBMF7IYnbViMy";
+export const RESUME_PDF_URL = "/resume.pdf";
 
 export const HOBBIES = ["Vinyls","Backpacking","Basketball","Golf","Video Production","App Dev"];
 
