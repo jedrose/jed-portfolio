@@ -21,26 +21,136 @@ export const CAB_POSITIONS = [
 
 export const CAB_CY = ROOM_H * 0.42;
 
-export const PROJECTS_DATA = [
-  { cat:"DEFENSE TECH", color:"#2563eb", items:[
-    { title:"Michigan Defense Technology", year:"2025-Now", tags:["Defense","Leadership","DARPA"],
-      desc:"Co-founded U-M's first defense tech org. 100+ applicants, 18% acceptance. Secured exclusive events with Anduril and Palantir. Hosted Gen. H.R. McMaster on campus. Directing 3 DARPA-aligned software projects." },
+export const ALL_PROJECTS = [
+  { cat: "ENGINEERING", color: "#059669", items: [
+    {
+      deepId: "attendance-counter",
+      title: "Sensor-Based Attendance Counter",
+      year: "Spring 2025",
+      tags: ["Arduino","C++","CAD","Embedded Systems"],
+      desc: "Designed and built a real-time bidirectional people counter using dual ultrasonic sensors and an Arduino, 3D-printed into a door-frame housing. Eliminates gameable QR code attendance.",
+    },
+    {
+      deepId: "pneumonia",
+      title: "Robust Deep Learning for Pneumonia Detection",
+      year: "2023",
+      tags: ["TensorFlow","CNN","Python","ML"],
+      desc: "Lifted field accuracy from 74.7% to 98.8% by engineering rotation and rendering-shift augmentation into a clinical CNN pipeline. No new labeled data required.",
+    },
+    {
+      title: "Warehouse Vision Robot",
+      year: "2026 - Now",
+      tags: ["Raspberry Pi","ROS2","Python","C++","Lidar"],
+      status: "IN PROGRESS",
+      desc: "Building an autonomous warehouse cart that navigates aisles, reads barcodes, avoids obstacles, and maps its environment. Sends live inventory data to a web dashboard. Stack: Raspberry Pi, Arduino/STM32, ROS2.",
+    },
+    {
+      title: "Midtown EV Rally",
+      year: "2022 - 2024",
+      tags: ["Hardware","EV","Electrical"],
+      desc: "Co-founded Atlanta's first collegiate EV club. Raised $25K from Mercedes-Benz and Rivian. Engineered a complete brushless DC drivetrain wiring system. Competed nationally.",
+    },
   ]},
-  { cat:"CONSULTING & VENTURE", color:"#7c3aed", items:[
-    { title:"Ascend Consulting Group", year:"2024-Now", tags:["Consulting","VC","Strategy"],
-      desc:"VP of Consulting, founding member. 10+ paid clients including YC-backed startups, Pro Football Focus, and Capitol AI. Founded VC scout team." },
-    { title:"First Financial Bank USA", year:"Summer 2026", tags:["Product","Fintech","PM"],
-      desc:"Led 7-person team through 13-week sprint. Full-stack IRA deposit MVP targeting $50M in retail deposits. Cleared all 3 executive gate reviews." },
+  { cat: "DEFENSE & MDT", color: "#2563eb", items: [
+    {
+      title: "Michigan Defense Technology",
+      year: "2025 - Now",
+      tags: ["Defense","Leadership","DARPA","Venture"],
+      desc: "Co-founded U-M's first defense tech org. 100+ applicants, 18% acceptance. Secured exclusive events with Anduril and Palantir. Hosted Gen. H.R. McMaster on campus.",
+    },
+    {
+      title: "MDT — DARPA Research",
+      year: "2025 - Now",
+      tags: ["DARPA","Autonomy","Satcom","AI","Ethics"],
+      status: "IN PROGRESS",
+      desc: "Leading research across 3 DARPA programs: ASIMOV (autonomous systems ethics and certification), Space-BACN (hybrid military satcom strategy), and ACE (AI copilot and human-AI teaming doctrine).",
+    },
+    {
+      title: "MDT — Swarm Drone Project",
+      year: "2025 - Now",
+      tags: ["Hardware","Drones","Autonomy","Embedded"],
+      status: "IN PROGRESS",
+      desc: "Leading hardware development of a swarm drone system with a defense startup. Directing the team through design, integration, and field testing.",
+    },
+    {
+      title: "MDT — Hypersonic LLM Pipeline",
+      year: "2025 - Now",
+      tags: ["LLM","AI","Data Engineering","Hypersonics"],
+      status: "IN PROGRESS",
+      desc: "Leading a data cleaning and LLM pipeline that simulates design and manufacturing processes for a hypersonic startup. Bridging AI tooling with defense-grade engineering workflows.",
+    },
   ]},
-  { cat:"ENGINEERING", color:"#059669", items:[
-    { title:"Midtown EV Rally", year:"2022-2024", tags:["Hardware","EV","Electrical"],
-      desc:"Co-founded Atlanta's first collegiate EV club. Raised $25K from Mercedes-Benz and Rivian. Engineered complete brushless DC drivetrain wiring. Competed nationally." },
-    { title:"MIT Inspirit AI", year:"2023", tags:["AI","ML","Python"],
-      desc:"Trained a CNN to classify pneumonia from chest X-ray images." },
+  { cat: "CONSULTING & PRODUCT", color: "#7c3aed", items: [
+    {
+      deepId: "capitol-ai",
+      title: "Capitol AI: Product Strategy, UX Research & AI Workflows",
+      year: "2024 - 2025",
+      tags: ["Product Management","UX Research","AI Workflows","Frontend Dev"],
+      desc: "3 consecutive engagements with a YC-backed AI workflow startup. Progressed from Co-PM to Strategic Lead, running 100+ user interviews, shipping a live frontend demo, and owning platform differentiation strategy.",
+    },
+    {
+      deepId: "pff",
+      title: "Pro Football Focus: Product Strategy & UX Research",
+      year: "2025 - 2026",
+      tags: ["Product Management","UX Research","GTM Strategy","Sports Analytics"],
+      desc: "3 consecutive engagements with a $160M NFL analytics company. Progressed to Head PM and sole client POC, running 100+ user interviews and driving 3x DAU and 3x retention on the Player Prop Tool launch.",
+    },
+    {
+      deepId: "stellar-sleep",
+      title: "Stellar Sleep: Operations & Product",
+      year: "Spring 2026",
+      tags: ["SQL","Metabase","ElevenLabs","UX","Operations"],
+      desc: "Operations Engineer at a YC-backed sleep health startup. Built a Metabase SQL analytics dashboard, redid onboarding videos using ElevenLabs AI, developed a new customer journey framework, and led CRM tool research and selection.",
+    },
+    {
+      title: "First Financial Bank USA",
+      year: "Summer 2026",
+      tags: ["Product","Fintech","PM"],
+      status: "IN PROGRESS",
+      desc: "Leading a 7-person team through a 13-week sprint. Full-stack IRA deposit MVP targeting $50M in retail deposits. Cleared all 3 executive gate reviews.",
+    },
   ]},
 ];
 
 export const DEEP_PROJECTS = [
+  {
+    id: "stellar-sleep",
+    title: "Stellar Sleep: Operations & Product",
+    subtitle: "Operations Engineer · YC-Backed Startup · Spring 2026",
+    coverColor: "#6d28d9",
+    coverImage: null,
+    category: "OPERATIONS / PRODUCT",
+    tags: ["SQL", "Metabase", "ElevenLabs AI", "UX Research", "CRM", "Customer Journey"],
+    blurb: "Operations Engineer at a YC-backed sleep health startup. Built a Metabase SQL analytics dashboard, produced AI-voiced onboarding videos with ElevenLabs, developed a new customer journey framework, and led CRM tool research and selection.",
+    context: "Stellar Sleep is a YC-backed startup in the sleep health space. Hired directly as an Operations Engineer to improve internal tooling, user onboarding, and retention infrastructure.",
+    techStack: ["SQL", "Metabase", "ElevenLabs", "Figma", "CRM Platforms"],
+    clientQuote: null,
+    impact: [
+      "Built a Metabase SQL dashboard giving the team live visibility into key operational and user metrics",
+      "Redid the full onboarding video suite using ElevenLabs AI, improving production quality and reducing turnaround time",
+      "Developed a new customer journey framework surfacing key drop-off points across the user lifecycle",
+      "Led research and final recommendation for a new CRM tool, evaluated against retention and lifecycle communication goals",
+    ],
+    images: [],
+    sections: [
+      {
+        heading: "The Role",
+        body: "Stellar Sleep is a YC-backed startup in the sleep health space. I joined as an Operations Engineer, working directly on internal tooling, user onboarding, and the operational infrastructure that supports retention. The work spanned data, content, and product strategy.",
+      },
+      {
+        heading: "Metabase SQL Dashboard",
+        body: "The team lacked centralized visibility into key operational and user metrics. I built a Metabase SQL dashboard that pulled live data and surfaced the metrics the team actually needed to track: user activity, onboarding completion, retention signals, and operational KPIs. The goal was to make data accessible without requiring anyone to write a query.",
+      },
+      {
+        heading: "Onboarding Video Rebuild with ElevenLabs AI",
+        body: "The existing onboarding videos were outdated and low-quality. I rebuilt the full suite using ElevenLabs AI for voiceover, significantly improving production quality and cutting the time required to update or re-record content. The new videos gave users a cleaner, more professional first experience with the product.",
+      },
+      {
+        heading: "Customer Journey and CRM Strategy",
+        body: "I mapped the full customer journey from acquisition through retention, identifying the specific lifecycle moments where users were dropping off. That research informed a new customer journey framework and a structured CRM tool evaluation. I compared platforms against Stellar Sleep's needs around segmentation, automation, and ease of use, and delivered a final recommendation with an implementation roadmap.",
+      },
+    ],
+  },
   {
     id: "capitol-ai",
     title: "Capitol AI: Product Strategy, UX Research & AI Workflows",
