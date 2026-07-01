@@ -172,6 +172,28 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             )}
 
+            {/* Inline videos for this section */}
+            {s.videos && s.videos.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem", marginBottom: "1.25rem" }}>
+                {s.videos.map((v, vi) => (
+                  <div key={vi} style={{ borderRadius: 10, overflow: "hidden", border: `1px solid ${BORDER}`, background: "#000" }}>
+                    {v.label && (
+                      <div style={{ padding: "8px 14px", background: CARD, borderBottom: `1px solid ${BORDER}` }}>
+                        <span style={{ fontFamily: PF, fontSize: 6, color: c, letterSpacing: "0.1em" }}>{v.label}</span>
+                      </div>
+                    )}
+                    <video
+                      controls
+                      playsInline
+                      style={{ width: "100%", display: "block", maxHeight: 420, background: "#000" }}
+                    >
+                      <source src={v.src} type={v.type || "video/mp4"} />
+                    </video>
+                  </div>
+                ))}
+              </div>
+            )}
+
             {/* Live demo embed */}
             {s.liveDemo && project.liveDemo && (
               <div style={{ marginBottom: "1.25rem" }}>
