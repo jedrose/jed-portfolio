@@ -36,8 +36,8 @@ export default function AboutSection({ color, onClose }) {
           <p style={{ fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.85, margin: 0, fontWeight: 400 }}>
             Hey, I&#39;m Jed Roseman, a sophomore at the University of Michigan studying Electrical Engineering.
             I&#39;m passionate about deep tech, defense, and startups, and always looking to deepen my technical skillset.
-            Whether I&#39;m running Michigan Defense Technology, advising startups, or wiring up a motor drivetrain, I&#39;m always
-            working at the intersection of technical depth, product thinking, and real-world impact.
+            Whether I&#39;m running Michigan Defense Technology, leading a software team at a bank this summer, or building
+            my own startups, I&#39;m always taking ownership of teams and products across defense, finance, and emerging tech.
           </p>
           <p style={{ fontSize: 16, color: TEXT_MUTED, lineHeight: 1.85, margin: "1.25rem 0 0", fontWeight: 400 }}>
             My goal is to work on hard problems in national security, deep tech, and emerging industries, orchestrating
