@@ -230,6 +230,46 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
       },
     ],
   },
+  {
+    id: "attendance-counter",
+    title: "Sensor-Based Attendance Counter",
+    subtitle: "ENGR 100 · University of Michigan · Spring 2025",
+    coverColor: "#059669",
+    category: "HARDWARE / EMBEDDED",
+    tags: ["Arduino", "C++", "CAD", "Onshape", "Embedded Systems", "Sensors"],
+    blurb: "Designed and built a real-time bidirectional people counter using dual ultrasonic sensors and an Arduino, 3D-printed into a door-frame housing. Detects entry vs. exit via order of occlusion — no QR codes, no google forms, no way to fake it.",
+    context: "Built as a semester-long engineering capstone in ENGR 100 at the University of Michigan. The team of five identified a real problem raised directly by our professor: the existing QR-code attendance system was trivially gameable. Students would share the Google Form link with friends who never showed up. The goal was a physical device that counted people entering and exiting a room accurately, automatically, and without any digital bypass.",
+    techStack: ["Arduino C++", "Ultrasonic Sensors", "Onshape (CAD)", "3D Printing", "MATLAB"],
+    clientQuote: null,
+    impact: [
+      "Accurate bidirectional counting: dual-sensor order-of-occlusion logic correctly distinguishes entry from exit — tested across varied walking speeds and environments",
+      "Fully self-contained hardware: 3D-printed case mounts flush on a door frame, runs on battery, no external infrastructure needed",
+      "Closed the cheating loophole: physical presence at the sensor is required — no link-sharing, no form-forwarding, no proxy attendance",
+    ],
+    images: [],
+    sections: [
+      {
+        heading: "The Problem",
+        body: "Our professor flagged it in lecture: students were sharing the Google Form link with friends who never attended. QR-code attendance is trivially gameable — one person scans, shares the link in a group chat, and ten people get credit for showing up. We were tasked with building something physical that actually required you to be there.",
+      },
+      {
+        heading: "Design Process",
+        body: "We worked through an objectives tree, a morphological chart, and a numerical evaluation matrix to compare approaches — infrared beams, camera-based vision, pressure mats, and ultrasonic ranging all made the list. We landed on a dual-sensor ultrasonic system that could determine direction of travel based on which sensor was occluded first. The order-of-occlusion approach is robust: it doesn't need image processing, it works in any lighting condition, and the logic is straightforward to implement on an Arduino.",
+      },
+      {
+        heading: "Hardware & Wiring",
+        body: "I was responsible for wiring the Arduino and all hardware integration. The device uses two ultrasonic sensors mounted on a 3D-printed bracket that attaches to the side of a door frame, using the opposite frame as a backstop. Each sensor pings independently. When someone walks through, the sensors fire in sequence — the order tells you which direction they're going. I wired both sensors to the Arduino's digital pins, handled the power routing, and ran hardware-level testing to confirm sensor responsiveness across different distances and angles.",
+      },
+      {
+        heading: "Programming & Logic",
+        body: "The firmware is written in Arduino C++. The core logic: poll both sensors in a tight loop, track which one detects an object first, apply a timing window to debounce and reject false positives, then increment or decrement the running count. We also added physical buttons to manually adjust the count if needed, an LCD display showing the live total, and low-battery detection. An earlier prototype had the sensors angled downward from above the door frame — more precise for varying speeds, but the programming complexity made us pivot to the side-mount design, which hit all the functional requirements with a simpler implementation.",
+      },
+      {
+        heading: "Testing & Results",
+        body: "We ran systematic accuracy tests across multiple environments: a standard interior door, a wider hallway entry, and varied walking speeds from slow to brisk. The device consistently distinguished entry from exit and maintained an accurate running count through dozens of trials. Battery life and sensor range were also evaluated. The final design met every requirement we initialized at the start of the project.",
+      },
+    ],
+  },
 ];
 
 export const RESUME_PDF_URL = "/resume.pdf";
