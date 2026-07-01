@@ -34,7 +34,7 @@ export default function AboutSection({ color, onClose }) {
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>INTRO</SectionLabel>
           <p style={{ fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.85, margin: 0, fontWeight: 400 }}>
-            Hey, I&#39;m Jed Roseman, a sophomore at the University of Michigan studying Electrical Engineering.
+            Hey, I&#39;m Jed Roseman, a junior at the University of Michigan studying Electrical Engineering.
             I&#39;m passionate about deep tech, defense, and startups, and always looking to deepen my technical skillset.
             Whether I&#39;m running Michigan Defense Technology, leading a software team at a bank this summer, or building
             my own startups, I&#39;m always taking ownership of teams and products across defense, finance, and emerging tech.
