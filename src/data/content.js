@@ -237,6 +237,57 @@ export const RESUME_PDF_URL =
 
 export const HOBBIES = ["Vinyls","Backpacking","Basketball","Golf","Video Production","App Dev"];
 
+export const TOP_FILMS = [
+  {
+    title: "Reservoir Dogs", year: 1992, rating: 4, director: "Tarantino",
+    poster: "https://media.themoviedb.org/t/p/w500/xi8Iu6qyTfyZVDVy60raIOYJJmk.jpg",
+  },
+  {
+    title: "City of God", year: 2002, rating: 5, director: "Meirelles",
+    poster: "https://media.themoviedb.org/t/p/w500/k7eYdWvhYQyRQoU2TB2A2Xu2TfD.jpg",
+  },
+  {
+    title: "The Prestige", year: 2006, rating: 4.5, director: "Nolan",
+    poster: "https://media.themoviedb.org/t/p/w500/tRNlZbgNCNOpLpbPEz5L8G8A0JN.jpg",
+  },
+  {
+    title: "Memento", year: 2000, rating: 5, director: "Nolan",
+    poster: "https://media.themoviedb.org/t/p/w500/fKTPH2WvH8nHTXeBYBVhawtRqtR.jpg",
+  },
+  {
+    title: "Mulholland Drive", year: 2001, rating: 4.5, director: "Lynch",
+    poster: "https://media.themoviedb.org/t/p/w500/x7A59t6ySylr1L7aubOQEA480vM.jpg",
+  },
+];
+
+export const TOP_ARTISTS = [
+  {
+    name: "Kanye West", genre: "Hip-Hop / Rap",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Kanye_West_at_the_2009_Tribeca_Film_Festival_%28crop_2%29.jpg",
+    gradient: "linear-gradient(135deg, #1a0533 0%, #4a1060 100%)",
+  },
+  {
+    name: "The Smiths", genre: "Indie / Post-Punk",
+    image: "https://upload.wikimedia.org/wikipedia/commons/6/68/The_Smiths_%281984_Sire_publicity_photo%29_002.jpg",
+    gradient: "linear-gradient(135deg, #0f2010 0%, #2d5a1b 100%)",
+  },
+  {
+    name: "Chris Stussy", genre: "Deep House / Techno",
+    image: "https://lastfm.freetls.fastly.net/i/u/avatar170s/2ad819f6e8c89bb53cdfaaed5943473e",
+    gradient: "linear-gradient(135deg, #001233 0%, #023e8a 100%)",
+  },
+  {
+    name: "Nine Vicious", genre: "Experimental Rap",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Nine_Vicious_July_11th_2025_%28cropped%29.jpg/250px-Nine_Vicious_July_11th_2025_%28cropped%29.jpg",
+    gradient: "linear-gradient(135deg, #1a0010 0%, #6b0020 100%)",
+  },
+  {
+    name: "Pz'", genre: "Experimental Rap",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Pz%27_performance_2026_%C3%98Way.png/250px-Pz%27_performance_2026_%C3%98Way.png",
+    gradient: "linear-gradient(135deg, #001a1a 0%, #005f5f 100%)",
+  },
+];
+
 export const CONTACT_LINKS = [
   { label:"EMAIL",    href:"mailto:jedrose@umich.edu",                display:"jedrose@umich.edu",          icon:"✉" },
   { label:"LINKEDIN", href:"https://www.linkedin.com/in/jedroseman/", display:"linkedin.com/in/jedroseman", icon:"in" },
