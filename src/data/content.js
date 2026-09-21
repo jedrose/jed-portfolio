@@ -38,11 +38,12 @@ export const ALL_PROJECTS = [
       desc: "Lifted field accuracy from 74.7% to 98.8% by engineering rotation and rendering-shift augmentation into a clinical CNN pipeline. No new labeled data required.",
     },
     {
+      deepId: "warehouse-robot",
       title: "Warehouse Vision Robot",
-      year: "2026 - Now",
-      tags: ["Raspberry Pi","ROS2","Python","C++","Lidar"],
+      year: "Summer 2026 - Now",
+      tags: ["Raspberry Pi","Arduino","ROS2","Python","C++","Lidar"],
       status: "IN PROGRESS",
-      desc: "Building an autonomous warehouse cart that navigates aisles, reads barcodes, avoids obstacles, and maps its environment. Sends live inventory data to a web dashboard. Stack: Raspberry Pi, Arduino/STM32, ROS2.",
+      desc: "Autonomous inventory robot for a real customer, Payless Decor. Drives warehouse aisles on its own, reads barcodes off the racking, and pushes counts into their existing inventory system. Raspberry Pi + Arduino Uno, ROS2, RPLIDAR A1M8.",
     },
     {
       title: "Midtown EV Rally",
@@ -389,6 +390,90 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
           { src: "/engr100-imgs/Mode Test.mp4", label: "MODE TEST", type: "video/mp4" },
           { src: "/engr100-imgs/Invert Test.mp4", label: "INVERT TEST", type: "video/mp4" },
         ],
+      },
+    ],
+  },
+  {
+    id: "warehouse-robot",
+    title: "Warehouse Vision Robot",
+    subtitle: "Independent Hardware Project · Payless Decor · Summer 2026 - Now",
+    coverColor: "#059669",
+    // Cover photo: drop a file at public/warehouse-robot-imgs/cover.jpg and set the path here.
+    coverImage: null,
+    category: "ROBOTICS / EMBEDDED",
+    tags: ["ROS2", "Raspberry Pi", "Arduino", "LIDAR", "SLAM", "Python", "C++"],
+    blurb: "Autonomous inventory robot for a real customer, Payless Decor. It drives the warehouse aisles on its own, reads barcodes off the racking, and pushes counts into the inventory system they already use. Currently in sensor bring-up.",
+    context: "Independent hardware project, started Summer 2026 and still going. Payless Decor counts their warehouse inventory fully by hand today. I am building the whole thing end to end: chassis, power system, firmware, ROS2 navigation, mast-mounted barcode camera, and the dashboard that the counts land in. This page is written as the build goes, so the status section is current rather than aspirational.",
+    techStack: ["ROS2", "Python", "C++", "Raspberry Pi", "Arduino Uno Rev3 (ATmega328P)", "RPLIDAR A1M8", "SLAM"],
+    clientQuote: null,
+    impact: [
+      "Caught a vendor encoder spec error before it reached navigation tuning: the ATmega328P has two hardware interrupt pins, so 4x quadrature decoding across two wheel encoders was never physically possible. Redesigned for 2x decoding and corrected the odometry constant to 0.62 mm per count",
+      "Sized power protection around the real worst case, all four motors stalled at 12.8 A, and dropped the fuse from 40 A to 20-25 A specifically so the fuse trips before the BMS does",
+      "Built the Pi-to-Uno serial link with framed motor commands, a 20 Hz odometry stream, and a 500 ms watchdog that halts drive on link loss",
+      "5 hardware and spec defects diagnosed during bring-up, including a chassis that shipped with misaligned motor inserts and the wrong bearings",
+      "LIDAR verified publishing clean scan geometry at about 7 Hz",
+    ],
+    // IMAGE SLOTS: put files in public/warehouse-robot-imgs/, then uncomment the entries
+    // below and the matching `images: [n]` lines in the sections. Indexes are positional,
+    // so keep the order stable when you uncomment.
+    images: [
+      // { src: "/warehouse-robot-imgs/chassis.jpg", contain: true },    // 0 - bare chassis and drivetrain
+      // { src: "/warehouse-robot-imgs/wiring.jpg", contain: true },     // 1 - power and fuse layout
+      // { src: "/warehouse-robot-imgs/lidar-scan.png", contain: true }, // 2 - RPLIDAR scan in RViz
+      // { src: "/warehouse-robot-imgs/mast.jpg", contain: true },       // 3 - camera mast
+      // { src: "/warehouse-robot-imgs/dashboard.png", contain: true },  // 4 - inventory dashboard
+    ],
+    // VIDEO SLOTS: drop clips in public/warehouse-robot-imgs/ and uncomment the `videos`
+    // block inside the status section below.
+    sections: [
+      {
+        heading: "The Problem",
+        body: "Payless Decor runs out of a 41K sq ft building, about 39K of it warehouse, with a 24 ft ceiling and product stacked up to 22 ft. Fourteen rows of racking, four levels high. Most rows are 26 bays, a few are half rows around 13. There are 1,598 active SKUs and roughly $4.4M in inventory on those racks. Today all of it gets counted by hand. Two people on ladders and forklifts get through one to two rows a day, depending on how organized the rows are, so a full pass takes roughly 7 to 14 two-person days.",
+      },
+      {
+        heading: "The Real Cost Is the Sales Freeze",
+        body: "The labor hurts, but the bigger problem is what counting does to sales. While a SKU is being counted, its availability gets switched off. If they are counting bamboo shades, nobody can sell bamboo shades, because new orders reserving stock mid-count make it impossible to tell what was counted from what was already promised. Every count day is lost sales on whatever is being counted. The current goal is to count every SKU once a quarter. Monthly would be a lot better, since they would actually know what is on the shelf, but at today's pace that triples the labor and triples the freeze days. That is the case for the robot. Run it at night when sales are slow, stop pulling two people off the floor for a day, and monthly counts stop being a staffing question.",
+      },
+      {
+        heading: "The Platform",
+        body: "Four-wheel skid-steer on a 310 x 256 mm chassis with 130 mm wheels. A Raspberry Pi runs ROS2 and does the thinking. An Arduino Uno Rev3 sits underneath it and does the real-time work: motor control, encoder counting, and the odometry stream. That Uno is the only microcontroller in the build, which matters more than it sounds like it should, and the first engineering decision below is entirely a consequence of it. An RPLIDAR A1M8 handles SLAM and obstacle avoidance at roughly 8 to 12 m range. The barcode camera rides on a mast so it can actually see up the racking. Counts stream live to a web dashboard.",
+        // images: [0],
+      },
+      {
+        heading: "Decision 1: The Encoder Spec Was Impossible",
+        body: "The vendor spec implied 4x quadrature decoding. 4x means catching every edge on both encoder channels, which means both channels need an interrupt. Two wheel encoders, two channels each, four interrupt pins. The ATmega328P has two. Not a tuning problem, not a firmware problem, just not physically possible on this chip. So I redesigned for 2x decoding, one interrupt per encoder, and recalculated the odometry constant to 0.62 mm per count. Catching it before navigation tuning was the whole point. A wrong odometry constant does not fail loudly. The robot still drives, the stack still runs, the map just quietly comes out wrong and you spend a week blaming the LIDAR.",
+      },
+      {
+        heading: "Decision 2: Sizing the Fuse to Fail First",
+        body: "Worst case on this platform is all four motors stalled at once, which pulls 12.8 A. I sized the protection around that number and then dropped the fuse from 40 A down to the 20-25 A range. A 40 A fuse would have sat above the BMS cutoff, so in a real overcurrent event the battery management system trips first. That is the wrong failure. A blown fuse is obvious: you see it, you swap it, you know exactly what happened. A BMS cutout looks like the robot just died for no reason, and you go hunting through firmware and wiring for a fault that was never there. I would rather lose a fuse than lose an afternoon.",
+        // images: [1],
+      },
+      {
+        heading: "Decision 3: The Pi to Uno Link",
+        body: "The Pi and the Uno talk over serial with framed motor commands, so a partial or garbled message gets rejected instead of half-executed. Odometry comes back the other way at 20 Hz, fast enough for the navigation stack without saturating the link. The part I care about most is the watchdog: if the Uno stops hearing from the Pi for 500 ms, it halts drive on its own. The Pi is running a full Linux userspace and ROS2, and things on that side can hang, crash, or get scheduled out. None of that should end with a robot still driving toward a rack, especially one that is supposed to run at night with nobody around to hit a stop button.",
+      },
+      {
+        heading: "What Went Wrong",
+        body: "The chassis shipped with misaligned motor inserts and the wrong bearings, so the first real task was sourcing replacements instead of building. Odometry drift has been a persistent fight and ties directly back to the encoder rework above. The mast is an open problem. Product goes up to 22 ft, so a ground robot is always reaching, and raising the camera on a mast to see more of the racking also raised the center of gravity and made the robot worse to drive. I have not solved that tradeoff yet, and I am not going to pretend a taller robot with a heavier top is fine. Five hardware and spec defects total have been diagnosed during bring-up. Most of the schedule so far has gone to finding them rather than to writing navigation code.",
+        // images: [3],
+      },
+      {
+        heading: "Where It Stands",
+        body: "Sensor bring-up. It is not driving under teleop yet. The LIDAR is verified and publishing clean scan geometry at about 7 Hz, which is the one subsystem I would call done. Power and firmware are designed and wired but not validated under load. Barcode reading and the dashboard are not built yet. Calling this a working inventory robot today would be a lie, so I am not going to.",
+        // images: [2],
+        // videos: [
+        //   { src: "/warehouse-robot-imgs/lidar-scan.mp4", label: "LIDAR SCAN", type: "video/mp4" },
+        //   { src: "/warehouse-robot-imgs/teleop.mp4", label: "TELEOP TEST", type: "video/mp4" },
+        // ],
+      },
+      {
+        heading: "What Is Next",
+        body: "Nearest goal is simple: get it driving. Teleop first, then closed-loop odometry, then SLAM on the real warehouse floor. After that the barcode pipeline, which is messier than it sounds: labels are a mix of Code 39 and Code 128, some SKUs are labeled with GTINs and others with Payless Decor's own SKU numbers, and some barcodes are one unit while others sit on a multipack where one scan means a box of 6. Then the dashboard, which is the point where it stops being a robot and starts being an inventory system. I also want to find out whether this works as a product for warehouses beyond this one. Payless Decor is one customer with one building. That is enough to build against and not enough to know if it generalizes.",
+        // images: [4],
+      },
+      {
+        heading: "Longer Term: Replace It With a Drone",
+        body: "This is early research, not a plan yet, but I think the long-term answer is a drone that replaces the ground robot entirely. The warehouse is 24 ft tall with product stacked to 22 ft across four rack levels. The top levels are exactly where people need ladders and forklifts today, and they are the levels a ground robot struggles to see. Every inch of mast I add makes the ground robot more top-heavy and worse to drive. A drone skips the whole tradeoff because height is free. It also brings a new set of problems I have not solved: flying indoors with no GPS, staying clear of racking and forklifts, getting enough flight time to cover a 39K sq ft floor, and holding steady long enough to read a barcode. The barcode pipeline, dashboard, and inventory integration do not care what carries the camera, so that work moves over either way.",
       },
     ],
   },
