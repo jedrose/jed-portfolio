@@ -94,6 +94,7 @@ export default function AboutSection({ color, onClose }) {
               { src: "/photos/mdt group photo.jpg", alt: "Michigan Defense Technology" },
               { src: "/photos/michigan national chip.png", alt: "Michigan National Championship" },
               { src: "/photos/EVR pic.png", alt: "EVR" },
+              { src: "/photos/first-pc-build.jpg", alt: "Building my first PC" },
             ].map(p => (
               <div key={p.src} style={{ borderRadius: 10, overflow: "hidden", border: `1px solid ${BORDER}` }}>
                 <img src={p.src} alt={p.alt} style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", display: "block" }} />
