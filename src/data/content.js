@@ -21,6 +21,32 @@ export const CAB_POSITIONS = [
 
 export const CAB_CY = ROOM_H * 0.42;
 
+// Room layouts. "wide" is the original single row of cabinets (desktop, landscape).
+// "tall" is a 2x2 grid used when the screen is portrait (phones, tablets held upright)
+// so the room fills the screen instead of shrinking to a thin strip.
+// cx/cy are each cabinet's center point, same convention as CAB_POSITIONS / CAB_CY.
+export const LAYOUTS = {
+  wide: {
+    key: "wide",
+    w: ROOM_W,
+    h: ROOM_H,
+    spawn: { x: ROOM_W / 2, y: ROOM_H * 0.78 },
+    cabs: CAB_POSITIONS.map(p => ({ id: p.id, cx: p.cx, cy: CAB_CY })),
+  },
+  tall: {
+    key: "tall",
+    w: 440,
+    h: 760,
+    spawn: { x: 220, y: 695 },
+    cabs: [
+      { id: "about",    cx: 108, cy: 230 },
+      { id: "projects", cx: 332, cy: 230 },
+      { id: "resume",   cx: 108, cy: 530 },
+      { id: "contact",  cx: 332, cy: 530 },
+    ],
+  },
+};
+
 export const ALL_PROJECTS = [
   { cat: "ENGINEERING", color: "#059669", items: [
     {

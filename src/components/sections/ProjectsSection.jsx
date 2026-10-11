@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../shared/Header";
 import ProjectDetail from "./ProjectDetail";
 import { PF, SANS, ALL_PROJECTS, DEEP_PROJECTS } from "../../data/content";
+import { useIsNarrow, useCanHover } from "../../hooks/useMedia";
 
 const DARK   = "#0d1117";
 const CARD   = "#161b22";
@@ -19,7 +20,7 @@ function SectionLabel({ color, children }) {
   );
 }
 
-function ProjectCard({ item, color, onOpen }) {
+function ProjectCard({ item, color, onOpen, narrow, canHover }) {
   const [hovered, setHovered] = useState(false);
   const deep = item.deepId ? DEEP_PROJECTS.find(d => d.id === item.deepId) : null;
   const isClickable = !!deep;
@@ -32,7 +33,7 @@ function ProjectCard({ item, color, onOpen }) {
       aria-label={isClickable ? `View project: ${item.title}` : undefined}
       onClick={isClickable ? () => onOpen(deep) : undefined}
       onKeyDown={isClickable ? (e) => { if (e.key === "Enter" || e.key === " ") onOpen(deep); } : undefined}
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => canHover && setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         background: CARD,
@@ -56,7 +57,7 @@ function ProjectCard({ item, color, onOpen }) {
         borderBottom: `1px solid ${color}33`,
         position: "relative",
         flexShrink: 0,
-        ...(coverImg ? { height: 120, overflow: "hidden", background: "#010409" } : {}),
+        ...(coverImg ? { height: narrow ? 150 : 120, overflow: "hidden", background: "#010409" } : {}),
       }}>
         {coverImg && (
           <>
@@ -78,25 +79,25 @@ function ProjectCard({ item, color, onOpen }) {
 
         {/* Title row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6, gap: 8 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.4 }}>
+          <div style={{ fontSize: narrow ? 15 : 14, fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.4 }}>
             {item.title}
           </div>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
             {item.status === "IN PROGRESS" && (
               <span style={{
-                fontFamily: PF, fontSize: 5, color: AMBER,
+                fontFamily: PF, fontSize: narrow ? 6 : 5, color: AMBER,
                 background: `${AMBER}18`, border: `1px solid ${AMBER}44`,
                 borderRadius: 4, padding: "2px 6px", letterSpacing: "0.08em", whiteSpace: "nowrap",
               }}>
                 IN PROGRESS
               </span>
             )}
-            <div style={{ fontFamily: PF, fontSize: 6, color: TEXT_MUTED, whiteSpace: "nowrap" }}>{item.year}</div>
+            <div style={{ fontFamily: PF, fontSize: narrow ? 7 : 6, color: TEXT_MUTED, whiteSpace: "nowrap" }}>{item.year}</div>
           </div>
         </div>
 
         {/* Description */}
-        <p style={{ fontSize: 12.5, color: TEXT_MUTED, lineHeight: 1.75, margin: "0 0 14px", flex: 1 }}>
+        <p style={{ fontSize: narrow ? 13.5 : 12.5, color: TEXT_MUTED, lineHeight: narrow ? 1.7 : 1.75, margin: "0 0 14px", flex: 1 }}>
           {item.desc}
         </p>
 
@@ -113,7 +114,7 @@ function ProjectCard({ item, color, onOpen }) {
 
         {/* CTA */}
         {isClickable && (
-          <div style={{ fontSize: 11, color, fontWeight: 700, letterSpacing: "0.06em" }}>
+          <div style={{ fontSize: narrow ? 12 : 11, color, fontWeight: 700, letterSpacing: "0.06em" }}>
             VIEW PROJECT +
           </div>
         )}
@@ -124,6 +125,8 @@ function ProjectCard({ item, color, onOpen }) {
 
 export default function ProjectsSection({ color, onClose }) {
   const [openProject, setOpenProject] = useState(null);
+  const narrow = useIsNarrow();
+  const canHover = useCanHover();
 
   if (openProject) {
     return (
@@ -136,23 +139,25 @@ export default function ProjectsSection({ color, onClose }) {
   }
 
   return (
-    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
+    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", overscrollBehavior: "contain", zIndex: 50, fontFamily: SANS }}>
       <Header title="PROJECTS.EXE" color={color} onClose={onClose} />
-      <div style={{ maxWidth: 820, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
-        <p style={{ fontSize: 15, color: TEXT_MUTED, marginBottom: "3rem", lineHeight: 1.75 }}>
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: narrow ? "1.75rem 1.125rem 4rem" : "2.5rem 2.5rem 5rem" }}>
+        <p style={{ fontSize: 15, color: TEXT_MUTED, marginBottom: narrow ? "2rem" : "3rem", lineHeight: 1.75 }}>
           A selection of what I have built and led. More coming.
         </p>
 
         {ALL_PROJECTS.map(group => (
-          <div key={group.cat} style={{ marginBottom: "3rem" }}>
+          <div key={group.cat} style={{ marginBottom: narrow ? "2.5rem" : "3rem" }}>
             <SectionLabel color={group.color}>{group.cat}</SectionLabel>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: narrow ? "1fr" : "1fr 1fr", gap: narrow ? "0.875rem" : "1rem" }}>
               {group.items.map(item => (
                 <ProjectCard
                   key={item.title}
                   item={item}
                   color={group.color}
                   onOpen={setOpenProject}
+                  narrow={narrow}
+                  canHover={canHover}
                 />
               ))}
             </div>

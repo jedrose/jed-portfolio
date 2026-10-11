@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { PF } from "../data/content";
 
-export default function ArcadeCabinet({ cab, near, onEnter }) {
+export default function ArcadeCabinet({ cab, near, onEnter, touch = false, scale = 1 }) {
   const [flicker, setFlicker] = useState(1);
+  // Bump tiny pixel text up when the room is scaled down (phones)
+  const fs = (base, min) => Math.max(base, min / scale);
 
   useEffect(() => {
     let timeout;
@@ -17,7 +19,7 @@ export default function ArcadeCabinet({ cab, near, onEnter }) {
   }, []);
 
   return (
-    <div onClick={onEnter}
+    <div onClick={onEnter} data-cab={cab.id}
       style={{ width:200, display:"flex", flexDirection:"column", alignItems:"center",
         cursor:"pointer",
         transform: near ? "scale(1.06)" : "scale(1)",
@@ -28,7 +30,7 @@ export default function ArcadeCabinet({ cab, near, onEnter }) {
       <div style={{ width:180, height:16, background: near ? cab.color : cab.color+"99",
         borderRadius:"8px 8px 0 0", border:`2px solid ${near ? cab.color : cab.color+"66"}`,
         borderBottom:"none", display:"flex", alignItems:"center", justifyContent:"center" }}>
-        <span style={{ fontFamily:PF, fontSize:5, color:"#fff", letterSpacing:"0.15em", opacity:0.9 }}>
+        <span style={{ fontFamily:PF, fontSize:fs(5, 6), color:"#fff", letterSpacing:"0.15em", opacity:0.9 }}>
           {cab.marquee}
         </span>
       </div>
@@ -50,12 +52,12 @@ export default function ArcadeCabinet({ cab, near, onEnter }) {
               backgroundImage:"repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px)",
               pointerEvents:"none" }} />
             <div style={{ fontSize:32, lineHeight:1, zIndex:1 }}>{cab.icon}</div>
-            <div style={{ fontFamily:PF, fontSize:7, color:cab.color, letterSpacing:"0.1em", zIndex:1 }}>
+            <div style={{ fontFamily:PF, fontSize:fs(7, 8), color:cab.color, letterSpacing:"0.1em", zIndex:1 }}>
               {cab.label}
             </div>
             {near && (
-              <div style={{ fontFamily:PF, fontSize:5, color:cab.color+"99", letterSpacing:"0.08em", zIndex:1 }}>
-                PRESS ENTER
+              <div style={{ fontFamily:PF, fontSize:fs(5, 6), color:cab.color+"99", letterSpacing:"0.08em", zIndex:1 }}>
+                {touch ? "TAP TO OPEN" : "PRESS ENTER"}
               </div>
             )}
           </div>

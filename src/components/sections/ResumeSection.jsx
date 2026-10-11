@@ -1,5 +1,6 @@
 import Header from "../shared/Header";
 import { PF, SANS, RESUME_PDF_URL } from "../../data/content";
+import { useIsNarrow, useIsTouch } from "../../hooks/useMedia";
 
 const DARK = "#0d1117";
 const CARD = "#161b22";
@@ -8,11 +9,19 @@ const TEXT_PRIMARY = "#e6edf3";
 const TEXT_MUTED = "#8b949e";
 
 export default function ResumeSection({ color, onClose }) {
+  const narrow = useIsNarrow();
+  const touch = useIsTouch();
+  // Phone and tablet browsers can't show a PDF inside the page ("Couldn't load plugin"),
+  // so on those we skip the inline preview and lead with the open/download buttons.
+  const showPreview = !narrow && !touch;
+  const btnSize = narrow ? 8 : 7;
+  const btnPad = narrow ? "16px 24px" : "11px 24px";
+
   return (
-    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
+    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", overscrollBehavior: "contain", zIndex: 50, fontFamily: SANS }}>
       <Header title="RESUME.EXE" color={color} onClose={onClose} />
 
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: narrow ? "2rem 1.125rem 4rem" : "2.5rem 2.5rem 5rem" }}>
 
         {/* Title + subtitle */}
         <div style={{ marginBottom: "2rem", textAlign: "center" }}>
@@ -20,21 +29,25 @@ export default function ResumeSection({ color, onClose }) {
             My Resume
           </h1>
           <p style={{ fontSize: 14, color: TEXT_MUTED, margin: 0, fontFamily: SANS }}>
-            Click below to download or view full screen.
+            {touch ? "Tap below to open or download the PDF." : "Click below to download or view full screen."}
           </p>
         </div>
 
         {/* Action buttons */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: "2rem" }}>
+        <div style={{
+          display: "flex", justifyContent: "center", gap: 12,
+          margin: narrow ? "0 auto 2rem" : "0 0 2rem",
+          ...(narrow ? { flexDirection: "column", maxWidth: 360 } : {}),
+        }}>
           <a
             href={RESUME_PDF_URL}
             download="Jedidiah_Roseman_Resume.pdf"
             target="_blank"
             rel="noreferrer"
             style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              padding: "11px 24px", background: color, color: "#fff",
-              borderRadius: 8, fontFamily: PF, fontSize: 7, letterSpacing: "0.08em",
+              display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
+              padding: btnPad, background: color, color: "#fff",
+              borderRadius: 8, fontFamily: PF, fontSize: btnSize, letterSpacing: "0.08em",
               fontWeight: 700, textDecoration: "none",
               boxShadow: `0 0 16px ${color}44`,
               transition: "opacity 0.15s, transform 0.15s",
@@ -52,11 +65,11 @@ export default function ResumeSection({ color, onClose }) {
             target="_blank"
             rel="noreferrer"
             style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              padding: "11px 24px", background: CARD,
+              display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
+              padding: btnPad, background: CARD,
               border: `1px solid ${BORDER}`,
               color: TEXT_PRIMARY, borderRadius: 8,
-              fontFamily: PF, fontSize: 7, letterSpacing: "0.08em", fontWeight: 700,
+              fontFamily: PF, fontSize: btnSize, letterSpacing: "0.08em", fontWeight: 700,
               textDecoration: "none",
               transition: "border-color 0.15s, transform 0.15s",
             }}
@@ -66,12 +79,12 @@ export default function ResumeSection({ color, onClose }) {
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
             </svg>
-            OPEN FULL SCREEN
+            {narrow ? "OPEN RESUME" : "OPEN FULL SCREEN"}
           </a>
         </div>
 
-        {/* Browser-frame PDF preview */}
-        <div style={{
+        {/* Browser-frame PDF preview (desktop only) */}
+        {showPreview && <div style={{
           border: `1px solid ${BORDER}`,
           borderRadius: 10,
           overflow: "hidden",
@@ -107,7 +120,7 @@ export default function ResumeSection({ color, onClose }) {
               display: "block",
             }}
           />
-        </div>
+        </div>}
 
       </div>
     </div>

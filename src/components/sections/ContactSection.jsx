@@ -1,5 +1,6 @@
 import Header from "../shared/Header";
 import { PF, SANS, CONTACT_LINKS } from "../../data/content";
+import { useIsNarrow, useCanHover } from "../../hooks/useMedia";
 
 const DARK = "#0d1117";
 const CARD = "#161b22";
@@ -35,11 +36,14 @@ const ICONS = {
 };
 
 export default function ContactSection({ color, onClose }) {
+  const narrow = useIsNarrow();
+  const canHover = useCanHover();
+
   return (
-    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
+    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", overscrollBehavior: "contain", zIndex: 50, fontFamily: SANS }}>
       <Header title="CONTACT.EXE" color={color} onClose={onClose} />
-      <div style={{ maxWidth: 600, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
-        <p style={{ fontSize: 16, color: TEXT_MUTED, lineHeight: 1.85, marginBottom: "2.75rem", letterSpacing: "0.01em" }}>
+      <div style={{ maxWidth: 600, margin: "0 auto", padding: narrow ? "1.75rem 1.125rem 4rem" : "2.5rem 2.5rem 5rem" }}>
+        <p style={{ fontSize: narrow ? 15 : 16, color: TEXT_MUTED, lineHeight: narrow ? 1.75 : 1.85, marginBottom: narrow ? "2rem" : "2.75rem", letterSpacing: "0.01em" }}>
           Open to internships, defense tech, venture, and product roles. Always down to talk MDT or interesting projects.
         </p>
 
@@ -53,7 +57,7 @@ export default function ContactSection({ color, onClose }) {
               aria-label={`${l.label}: ${l.display}`}
               style={{
                 display: "flex", alignItems: "center", gap: 16,
-                padding: "1.125rem 1.375rem",
+                padding: narrow ? "1rem 1.125rem" : "1.125rem 1.375rem",
                 background: CARD,
                 border: `1px solid ${BORDER}`,
                 borderRadius: 10,
@@ -62,6 +66,7 @@ export default function ContactSection({ color, onClose }) {
                 cursor: "pointer",
               }}
               onMouseEnter={e => {
+                if (!canHover) return;
                 e.currentTarget.style.borderColor = color;
                 e.currentTarget.style.background = `${color}0f`;
                 e.currentTarget.style.transform = "translateY(-1px)";
@@ -82,9 +87,9 @@ export default function ContactSection({ color, onClose }) {
               }}>
                 {ICONS[l.label] || null}
               </div>
-              <div>
-                <div style={{ fontFamily: PF, fontSize: 6, color, letterSpacing: "0.12em", marginBottom: 5 }}>{l.label}</div>
-                <div style={{ fontSize: 14, color: TEXT_PRIMARY, fontWeight: 500, letterSpacing: "0.01em" }}>{l.display}</div>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontFamily: PF, fontSize: narrow ? 7 : 6, color, letterSpacing: "0.12em", marginBottom: 5 }}>{l.label}</div>
+                <div style={{ fontSize: narrow ? 15 : 14, color: TEXT_PRIMARY, fontWeight: 500, letterSpacing: "0.01em", overflowWrap: "anywhere" }}>{l.display}</div>
               </div>
               <div style={{ marginLeft: "auto", color: "#374151", fontSize: 14, fontWeight: 600 }}>→</div>
             </a>
