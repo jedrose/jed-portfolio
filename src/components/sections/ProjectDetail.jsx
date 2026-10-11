@@ -1,4 +1,5 @@
 import { PF, SANS } from "../../data/content";
+import { useIsNarrow } from "../../hooks/useMedia";
 
 const DARK = "#0d1117";
 const CARD = "#161b22";
@@ -6,25 +7,29 @@ const BORDER = "#21262d";
 const TEXT_PRIMARY = "#e6edf3";
 const TEXT_MUTED = "#8b949e";
 
+const GUTTER_NARROW = "1.125rem";
+
 export default function ProjectDetail({ project, onBack }) {
   const c = project.coverColor;
+  const narrow = useIsNarrow();
+  const bodyText = narrow ? 14.5 : 15;
 
   return (
-    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 60, fontFamily: SANS }}>
+    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", overscrollBehavior: "contain", zIndex: 60, fontFamily: SANS }}>
 
       {/* Sticky header */}
       <div style={{
         background: "#0d1117", borderBottom: `1px solid ${c}33`,
-        padding: "1rem 2.5rem", display: "flex", alignItems: "center", gap: 16,
+        padding: narrow ? "0.5rem 1rem" : "1rem 2.5rem", display: "flex", alignItems: "center", gap: narrow ? 12 : 16,
         position: "sticky", top: 0, zIndex: 1,
       }}>
         <button
           onClick={onBack}
           aria-label="Back to projects"
           style={{
-            fontFamily: PF, fontSize: 6, background: "none",
+            fontFamily: PF, fontSize: narrow ? 8 : 6, background: "none",
             border: `1px solid ${c}44`, color: "#6b7280",
-            padding: "8px 14px", cursor: "pointer", borderRadius: 4,
+            padding: narrow ? "8px 16px" : "8px 14px", cursor: "pointer", borderRadius: 4,
             minWidth: 44, minHeight: 44, display: "flex", alignItems: "center",
             transition: "border-color 0.15s, color 0.15s",
           }}
@@ -37,10 +42,13 @@ export default function ProjectDetail({ project, onBack }) {
         <span style={{ fontFamily: PF, fontSize: 8, color: c, letterSpacing: "0.12em" }}>PROJECT.EXE</span>
       </div>
 
-      <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 2.5rem 5rem" }}>
+      <div style={{ maxWidth: 760, margin: "0 auto", padding: narrow ? `0 ${GUTTER_NARROW} 4rem` : "0 2.5rem 5rem" }}>
 
-        {/* Hero cover image */}
-        <div style={{ position: "relative", height: 260, overflow: "hidden", marginBottom: "2.5rem" }}>
+        {/* Hero cover image (edge to edge on phones) */}
+        <div style={{
+          position: "relative", height: narrow ? 210 : 260, overflow: "hidden",
+          margin: narrow ? `0 -${GUTTER_NARROW} 1.75rem` : "0 0 2.5rem",
+        }}>
           {project.coverImage ? (
             <img
               src={project.coverImage}
@@ -54,19 +62,19 @@ export default function ProjectDetail({ project, onBack }) {
             position: "absolute", inset: 0,
             background: `linear-gradient(to top, ${DARK} 0%, ${DARK}88 40%, transparent 100%)`,
           }} />
-          <div style={{ position: "absolute", bottom: 0, left: 0, padding: "1.5rem 2rem" }}>
-            <div style={{ fontSize: 22, fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.3, letterSpacing: "-0.01em" }}>
+          <div style={{ position: "absolute", bottom: 0, left: 0, padding: narrow ? `1rem ${GUTTER_NARROW}` : "1.5rem 2rem" }}>
+            <div style={{ fontSize: narrow ? 21 : 22, fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.3, letterSpacing: "-0.01em" }}>
               {project.title}
             </div>
           </div>
         </div>
 
         {/* Subtitle + blurb under hero */}
-        <div style={{ fontFamily: PF, fontSize: 6, color: project.coverColor, letterSpacing: "0.1em", marginBottom: 12 }}>
+        <div style={{ fontFamily: PF, fontSize: narrow ? 7 : 6, color: project.coverColor, letterSpacing: "0.1em", lineHeight: narrow ? 1.8 : undefined, marginBottom: 12 }}>
           {project.subtitle}
         </div>
         {project.blurb && (
-          <p style={{ fontSize: 15, color: TEXT_PRIMARY, lineHeight: 1.85, margin: "0 0 2rem", opacity: 0.85 }}>
+          <p style={{ fontSize: bodyText, color: TEXT_PRIMARY, lineHeight: narrow ? 1.75 : 1.85, margin: "0 0 2rem", opacity: 0.85 }}>
             {project.blurb}
           </p>
         )}
@@ -112,7 +120,7 @@ export default function ProjectDetail({ project, onBack }) {
         {/* Context */}
         <div style={{ marginBottom: "2rem" }}>
           <SectionLabel color={c}>CONTEXT</SectionLabel>
-          <p style={{ fontSize: 15, color: TEXT_MUTED, lineHeight: 1.85, margin: 0 }}>{project.context}</p>
+          <p style={{ fontSize: bodyText, color: TEXT_MUTED, lineHeight: narrow ? 1.75 : 1.85, margin: 0 }}>{project.context}</p>
         </div>
 
         {/* Tech stack - only shown when project has one */}
@@ -153,13 +161,14 @@ export default function ProjectDetail({ project, onBack }) {
         {project.sections.map((s, i) => (
           <div key={i} style={{ marginBottom: "2rem" }}>
             <SectionLabel color={c}>{s.heading.toUpperCase()}</SectionLabel>
-            <p style={{ fontSize: 15, color: TEXT_MUTED, lineHeight: 1.85, margin: "0 0 1.25rem" }}>{s.body}</p>
+            <p style={{ fontSize: bodyText, color: TEXT_MUTED, lineHeight: narrow ? 1.75 : 1.85, margin: "0 0 1.25rem" }}>{s.body}</p>
 
             {/* Inline images for this section */}
             {s.images && s.images.length > 0 && (
               <div style={{
                 display: "grid",
-                gridTemplateColumns: s.images.length === 1 && project.images[s.images[0]]?.fullWidth ? "1fr" : s.images.length === 1 ? "1fr" : "1fr 1fr",
+                // Side-by-side pairs stack on phones
+                gridTemplateColumns: narrow || s.images.length === 1 ? "1fr" : "1fr 1fr",
                 gap: "0.875rem",
                 marginBottom: "1.25rem",
               }}>
@@ -175,7 +184,7 @@ export default function ProjectDetail({ project, onBack }) {
                       />
                     );
                   }
-                  const isPaired = s.images.length > 1;
+                  const isPaired = s.images.length > 1 && !narrow;
                   return (
                     <div key={imgIdx} style={{
                       border: `1px solid ${BORDER}`,
@@ -244,12 +253,12 @@ export default function ProjectDetail({ project, onBack }) {
                   <iframe
                     src={project.liveDemo.src}
                     title={project.liveDemo.title}
-                    style={{ width: "100%", height: 600, border: "none", display: "block", background: "#fff" }}
+                    style={{ width: "100%", height: narrow ? 560 : 600, border: "none", display: "block", background: "#fff" }}
                     allow="autoplay"
                   />
                 </div>
                 <div style={{ fontSize: 11, color: TEXT_MUTED, marginTop: 8, textAlign: "center" }}>
-                  Fully interactive — click through the onboarding and dashboard.
+                  Fully interactive — {narrow ? "tap" : "click"} through the onboarding and dashboard.
                 </div>
               </div>
             )}
@@ -260,11 +269,11 @@ export default function ProjectDetail({ project, onBack }) {
                 background: "#010409",
                 border: `1px solid ${BORDER}`,
                 borderRadius: 10,
-                padding: "1.25rem 1.5rem",
+                padding: narrow ? "1rem" : "1.25rem 1.5rem",
                 overflowX: "auto",
               }}>
                 <pre style={{
-                  margin: 0, fontSize: 12.5, lineHeight: 1.75,
+                  margin: 0, fontSize: narrow ? 11.5 : 12.5, lineHeight: 1.75,
                   color: "#e6edf3",
                   fontFamily: "'Fira Code', 'Courier New', monospace",
                   whiteSpace: "pre",
@@ -278,13 +287,13 @@ export default function ProjectDetail({ project, onBack }) {
         {project.clientQuote && (
           <div style={{
             margin: "1rem 0 0",
-            padding: "2rem 2rem 2rem 2.5rem",
+            padding: narrow ? "1.25rem 1.25rem 1.25rem 1.5rem" : "2rem 2rem 2rem 2.5rem",
             borderLeft: `3px solid ${c}`,
             background: CARD,
             borderRadius: "0 8px 8px 0",
           }}>
             <p style={{
-              fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.8,
+              fontSize: narrow ? 15 : 16, color: TEXT_PRIMARY, lineHeight: 1.8,
               fontStyle: "italic", margin: "0 0 1rem",
             }}>
               "{project.clientQuote.text}"

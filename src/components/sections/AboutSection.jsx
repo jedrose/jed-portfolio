@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../shared/Header";
 import { PF, SANS, HOBBIES, TOP_FILMS, TOP_ARTISTS } from "../../data/content";
+import { useIsNarrow, useCanHover } from "../../hooks/useMedia";
 
 const DARK = "#0d1117";
 const CARD = "#161b22";
@@ -8,11 +9,28 @@ const BORDER = "#21262d";
 const TEXT_PRIMARY = "#e6edf3";
 const TEXT_MUTED = "#8b949e";
 
+const GUTTER_NARROW = "1.125rem";
+
 export default function AboutSection({ color, onClose }) {
+  const narrow = useIsNarrow();
+  const canHover = useCanHover();
+  const bodyText = narrow ? 15 : 16;
+
+  // On phones the film/artist grids become swipeable rows that bleed to the screen edge
+  const rowStyle = narrow
+    ? {
+        display: "flex", gap: "0.75rem", overflowX: "auto",
+        scrollSnapType: "x mandatory", scrollPaddingLeft: GUTTER_NARROW,
+        margin: `0 -${GUTTER_NARROW}`, padding: `0.25rem ${GUTTER_NARROW} 0.75rem`,
+        scrollbarWidth: "none", WebkitOverflowScrolling: "touch",
+      }
+    : { display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.75rem" };
+  const rowItem = narrow ? { flex: "0 0 40%", scrollSnapAlign: "start" } : undefined;
+
   return (
-    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
+    <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", overscrollBehavior: "contain", zIndex: 50, fontFamily: SANS }}>
       <Header title="ABOUT.EXE" color={color} onClose={onClose} />
-      <div style={{ maxWidth: 760, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
+      <div style={{ maxWidth: 760, margin: "0 auto", padding: narrow ? `1.75rem ${GUTTER_NARROW} 4rem` : "2.5rem 2.5rem 5rem" }}>
 
         {/* Headshot hero */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "2.5rem" }}>
@@ -20,26 +38,26 @@ export default function AboutSection({ color, onClose }) {
             src="/photos/headshot.jpg"
             alt="Jed Roseman"
             style={{
-              width: 160, height: 160, objectFit: "cover", objectPosition: "center center",
+              width: narrow ? 128 : 160, height: narrow ? 128 : 160, objectFit: "cover", objectPosition: "center center",
               borderRadius: "50%", border: `3px solid ${color}`,
               boxShadow: `0 0 0 6px ${color}22, 0 16px 40px rgba(0,0,0,0.5)`,
               display: "block", marginBottom: "1rem",
             }}
           />
           <div style={{ fontSize: 22, fontWeight: 700, color: TEXT_PRIMARY, letterSpacing: "-0.01em", marginBottom: 4 }}>Jed Roseman</div>
-          <div style={{ fontSize: 13, color: TEXT_MUTED, fontWeight: 500 }}>Electrical Engineering · University of Michigan · Class of 2028</div>
+          <div style={{ fontSize: 13, color: TEXT_MUTED, fontWeight: 500, ...(narrow ? { textAlign: "center", lineHeight: 1.5 } : {}) }}>Electrical Engineering · University of Michigan · Class of 2028</div>
         </div>
 
         {/* Intro */}
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>INTRO</SectionLabel>
-          <p style={{ fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.85, margin: 0, fontWeight: 400 }}>
+          <p style={{ fontSize: bodyText, color: TEXT_PRIMARY, lineHeight: narrow ? 1.75 : 1.85, margin: 0, fontWeight: 400 }}>
             Hey, I&#39;m Jed Roseman, a junior at the University of Michigan studying Electrical Engineering.
             I&#39;m passionate about deep tech, defense, and startups, and always looking to deepen my technical skillset.
             Whether I&#39;m running Michigan Defense Technology, leading a software team at a bank this summer, or building
             my own startups, I&#39;m always taking ownership of teams and products across defense, finance, and emerging tech.
           </p>
-          <p style={{ fontSize: 16, color: TEXT_MUTED, lineHeight: 1.85, margin: "1.25rem 0 0", fontWeight: 400 }}>
+          <p style={{ fontSize: bodyText, color: TEXT_MUTED, lineHeight: narrow ? 1.75 : 1.85, margin: "1.25rem 0 0", fontWeight: 400 }}>
             My goal is to work on hard problems in national security, deep tech, and emerging industries, orchestrating
             the ideas, people, and execution that turn them into ventures. I care about ownership and getting things built, not just ideas.
           </p>
@@ -48,14 +66,16 @@ export default function AboutSection({ color, onClose }) {
         {/* Quick stats */}
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>QUICK STATS</SectionLabel>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: narrow ? "1fr" : "repeat(3,1fr)", gap: narrow ? "0.625rem" : "1rem" }}>
             {[["U OF M", "Class of 2028"], ["MAJOR", "Electrical Eng."], ["LOCATION", "Ann Arbor, MI"]].map(([k, v]) => (
               <div key={k} style={{
                 background: CARD, border: `1px solid ${BORDER}`,
-                borderRadius: 10, padding: "1.25rem",
-                borderTop: `2px solid ${color}`,
+                borderRadius: 10, padding: narrow ? "0.875rem 1rem" : "1.25rem",
+                ...(narrow
+                  ? { borderLeft: `2px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }
+                  : { borderTop: `2px solid ${color}` }),
               }}>
-                <div style={{ fontFamily: PF, fontSize: 6, color, letterSpacing: "0.12em", marginBottom: 10 }}>{k}</div>
+                <div style={{ fontFamily: PF, fontSize: narrow ? 7 : 6, color, letterSpacing: "0.12em", marginBottom: narrow ? 0 : 10, whiteSpace: "nowrap" }}>{k}</div>
                 <div style={{ fontSize: 15, color: TEXT_PRIMARY, fontWeight: 600 }}>{v}</div>
               </div>
             ))}
@@ -84,7 +104,7 @@ export default function AboutSection({ color, onClose }) {
         {/* Gallery */}
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>GALLERY</SectionLabel>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.875rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: narrow ? "0.5rem" : "0.875rem" }}>
             {[
               { src: "/photos/backpacking.png", alt: "Backpacking at Olympic National Park" },
               { src: "/photos/florence.png", alt: "Florence, Italy — Duomo" },
@@ -126,9 +146,11 @@ export default function AboutSection({ color, onClose }) {
               </svg>
             </a>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.75rem" }}>
+          <div style={rowStyle}>
             {TOP_FILMS.map((film) => (
-              <FilmCard key={film.title} film={film} color={color} />
+              <div key={film.title} style={rowItem}>
+                <FilmCard film={film} color={color} canHover={canHover} />
+              </div>
             ))}
           </div>
         </div>
@@ -136,9 +158,11 @@ export default function AboutSection({ color, onClose }) {
         {/* Current Rotation */}
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>CURRENT ROTATION</SectionLabel>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.75rem" }}>
+          <div style={rowStyle}>
             {TOP_ARTISTS.map((artist) => (
-              <ArtistCard key={artist.name} artist={artist} color={color} />
+              <div key={artist.name} style={rowItem}>
+                <ArtistCard artist={artist} color={color} canHover={canHover} />
+              </div>
             ))}
           </div>
         </div>
@@ -185,13 +209,13 @@ function SectionLabel({ color, children, noMargin }) {
   );
 }
 
-function FilmCard({ film, color }) {
+function FilmCard({ film, color, canHover }) {
   const [hovered, setHovered] = React.useState(false);
   const [imgError, setImgError] = React.useState(false);
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => canHover && setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "relative", borderRadius: 10, overflow: "hidden",
@@ -236,7 +260,7 @@ function FilmCard({ film, color }) {
   );
 }
 
-function ArtistCard({ artist, color }) {
+function ArtistCard({ artist, color, canHover }) {
   const [hovered, setHovered] = React.useState(false);
   const [imgError, setImgError] = React.useState(!artist.image);
 
@@ -244,7 +268,7 @@ function ArtistCard({ artist, color }) {
 
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
+      onMouseEnter={() => canHover && setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "relative", borderRadius: 10, overflow: "hidden",
