@@ -24,6 +24,14 @@ export const CAB_CY = ROOM_H * 0.42;
 export const ALL_PROJECTS = [
   { cat: "ENGINEERING", color: "#059669", items: [
     {
+      deepId: "pocket-radar",
+      title: "Pocket Radar",
+      year: "Fall 2026 - Now",
+      tags: ["ESP32-C6","C++","mmWave Radar","Embedded","I2C"],
+      status: "IN PROGRESS",
+      desc: "A palm-sized 60 GHz radar that tracks people as live dots on a sweeping OLED radar screen, and reads heart and breathing rate when you sit still. XIAO ESP32-C6, Seeed MR60BHA2, U8g2.",
+    },
+    {
       deepId: "attendance-counter",
       title: "Sensor-Based Attendance Counter",
       year: "Spring 2025",
@@ -114,6 +122,78 @@ export const ALL_PROJECTS = [
 ];
 
 export const DEEP_PROJECTS = [
+  {
+    id: "pocket-radar",
+    title: "Pocket Radar",
+    subtitle: "Personal Hardware Project · Fall 2026 - Now",
+    coverColor: "#22c55e",
+    coverImage: "/pocket-radar-imgs/cover.jpg",
+    coverPosition: "center 45%",
+    category: "HARDWARE / EMBEDDED",
+    tags: ["ESP32-C6", "C++", "60 GHz mmWave", "U8g2", "I2C", "UART", "Embedded Systems"],
+    blurb: "A radar screen you can hold. A 60 GHz mmWave sensor tracks people in the room and an OLED draws them as live dots on a sweeping radar display. Sit still close enough and it reads your heart and breathing rate too. Went from parts on a desk to a working display in one late-night build session.",
+    context: "Personal project, started Fall 2026. I wanted to see what a cheap 60 GHz radar can actually sense through open air, and turn it into something you can hold. The hardware is Seeed's MR60BHA2 kit, a 60 GHz radar module with a XIAO ESP32-C6 on the back, plus a Grove 1.12 inch 128x128 OLED on the kit's single Grove port. Firmware is Arduino C++ on top of Seeed's mmWave library and U8g2.",
+    techStack: ["Arduino C++", "XIAO ESP32-C6", "Seeed MR60BHA2 (60 GHz)", "SH1107 128x128 OLED", "U8g2", "Seeed mmWave library"],
+    clientQuote: null,
+    impact: [
+      "16x faster display: moved the OLED from software I2C to the ESP32's hardware I2C at 400 kHz, taking it from 1 fps to 16 fps, close to the bus limit for a full 128x128 frame",
+      "Live people tracking at about 8 updates a second, drawn on a 6 m radar sweep. Held a person sitting still at 1.6 m for over two and a half minutes without dropping them",
+      "Tracked down a board that powered on but no computer could see: the kit has two USB-C ports, and only the one hidden inside the case carries data",
+      "Gated the heart and breathing readout to only show after 3 seconds of stillness inside 1.5 m, since the radar reports junk numbers while you move",
+    ],
+    images: [
+      { src: "/pocket-radar-imgs/first-light.jpg", contain: true },    // 0 - first light, 1 fps
+      { src: "/pocket-radar-imgs/inside-the-kit.jpg", contain: true }, // 1 - XIAO inside the case
+      { src: "/pocket-radar-imgs/vitals.jpg", contain: true },         // 2 - vitals locked in
+      { src: "/pocket-radar-imgs/hold-still.jpg", contain: true },     // 3 - moving, hold still
+      { src: "/pocket-radar-imgs/placement.jpg", contain: true },      // 4 - desk edge placement
+    ],
+    githubUrl: "https://github.com/jedrose/pocket-radar",
+    sections: [
+      {
+        heading: "The Idea",
+        body: "I wanted a radar screen I could hold. The MR60BHA2 is a 60 GHz mmWave module built for sleep monitoring. It picks up the tiny chest movement from breathing and your heartbeat, and it also tracks up to three people as x/y positions in the room. Pair that with a small OLED and you get the classic radar sweep, except the dots are real people.",
+      },
+      {
+        heading: "Bring-Up: The Board Nobody Could See",
+        body: "The first problem was not code. The kit powered on and its LED lit up, but neither my laptop nor my desktop could see it. I swapped cables, went through Device Manager on both machines, and checked every USB device's hardware ID. Nothing from Espressif anywhere. It turned out the kit has two USB-C ports. The one exposed through the case only supplies power. The XIAO's own port, the one that actually talks to a computer, sits inside. Opening the case fixed it instantly. The second surprise was the screen. I had planned around a 0.96 inch SSD1315, but the one on my desk was a 1.12 inch 128x128 SH1107, so the display driver had to change before anything would draw.",
+        images: [1],
+      },
+      {
+        heading: "1 FPS to 16 FPS",
+        body: "First light worked, but the sweep moved at one frame per second. The display was on software I2C, which wiggles the pins from the CPU one bit at a time, and a full 128x128 frame is 2 KB per update. The fix was switching to the ESP32's hardware I2C peripheral on the same two Grove pins and running the bus at 400 kHz. Same wires, 16x the frame rate, which is about the ceiling for pushing a whole frame over I2C. There was a second hidden speed trap in the radar library: its update call busy-waits for the entire timeout you pass it, so the example's 100 ms timeout alone would have capped the screen at 10 fps. I cut it to 5 ms.",
+        images: [0],
+        code: `// Same two Grove pins, now on the hardware I2C peripheral
+#define OLED_SCL D0
+#define OLED_SDA D10
+U8G2_SH1107_SEEED_128X128_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE, OLED_SCL, OLED_SDA);
+
+void setup() {
+  u8g2.setBusClock(400000);   // 400 kHz fast mode: 1 fps -> 16 fps
+  u8g2.begin();
+}
+
+void loop() {
+  mmWave.update(5);           // library busy-waits for the full timeout, keep it short
+  // draw grid, sweep, dots, HUD...
+}`,
+      },
+      {
+        heading: "Drawing the Radar",
+        body: "The radar reports each person as an x/y position in meters about 8 times a second. The display maps that onto a semicircle with 6 m at the rim, draws a sweeping beam with a short trail, and pings a ring around each target as the beam passes over it. The header shows how many people it sees and how far away the closest one is. Heart and breathing only show up after you have been still for 3 seconds within 1.5 m. Start moving and they drop back to dashes with a hold still hint, because the radar's vital sign numbers are junk while you move. Seeed says those modes are meant for sleep monitoring, so I treat them as a fun readout, not a medical one.",
+        images: [2, 3],
+      },
+      {
+        heading: "What the Radar Actually Sees",
+        body: "Placement mattered way more than code. My first test had the radar sitting low on the desk, aimed at my chair. It tracked me out to about 1.8 m, then lost me and locked onto the chair instead, even reporting a heart rate from it. The radar is designed to hold on to people who sit still so it does not lose someone on a couch, which means a chair that sways after you stand up turns into a sticky ghost. I moved the chair and put the radar at the desk edge facing open floor, and it tracked me sitting on my bed 1.6 m away for over two and a half minutes. I also confirmed the radar was already on the latest firmware (1.6.12) by asking it directly, which ruled out a risky firmware flash before I ever needed one.",
+        images: [4],
+      },
+      {
+        heading: "Where It Stands",
+        body: "It works on USB power: the sweep, live dots, target count and distance, and vitals when you hold still. Still to do: a proper walk test out to 3 to 4 m, a battery so it actually fits in a pocket, and probably a color OLED. The current screen can only light up white, and a green radar with a fading phosphor trail is the whole point.",
+      },
+    ],
+  },
   {
     id: "stellar-sleep",
     title: "Stellar Sleep: Operations & Product",
