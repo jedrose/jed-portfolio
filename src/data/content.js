@@ -29,7 +29,7 @@ export const ALL_PROJECTS = [
       year: "Fall 2026 - Now",
       tags: ["ESP32-C6","C++","mmWave Radar","Embedded","I2C"],
       status: "IN PROGRESS",
-      desc: "A palm-sized 60 GHz radar that tracks people as live dots on a sweeping OLED radar screen, and reads heart and breathing rate when you sit still. XIAO ESP32-C6, Seeed MR60BHA2, U8g2.",
+      desc: "A real-life take on the Call of Duty Heartbeat Sensor. A palm-sized 60 GHz radar that tracks people as live dots on a sweeping OLED screen, and reads heart and breathing rate when you sit still. XIAO ESP32-C6, Seeed MR60BHA2, U8g2.",
     },
     {
       deepId: "attendance-counter",
@@ -131,8 +131,8 @@ export const DEEP_PROJECTS = [
     coverPosition: "center 45%",
     category: "HARDWARE / EMBEDDED",
     tags: ["ESP32-C6", "C++", "60 GHz mmWave", "U8g2", "I2C", "UART", "Embedded Systems"],
-    blurb: "A radar screen you can hold. A 60 GHz mmWave sensor tracks people in the room and an OLED draws them as live dots on a sweeping radar display. Sit still close enough and it reads your heart and breathing rate too. Went from parts on a desk to a working display in one late-night build session.",
-    context: "Personal project, started Fall 2026. I wanted to see what a cheap 60 GHz radar can actually sense through open air, and turn it into something you can hold. The hardware is Seeed's MR60BHA2 kit, a 60 GHz radar module with a XIAO ESP32-C6 on the back, plus a Grove 1.12 inch 128x128 OLED on the kit's single Grove port. Firmware is Arduino C++ on top of Seeed's mmWave library and U8g2.",
+    blurb: "A real-life Call of Duty Heartbeat Sensor. A 60 GHz mmWave sensor tracks people in the room and an OLED draws them as live dots on a sweeping radar display. Sit still close enough and it reads your heart and breathing rate too. Went from parts on a desk to a working display in one late-night build session.",
+    context: "Personal project, started Fall 2026. The idea came from the Heartbeat Sensor in Call of Duty, the handheld that shows nearby players as blips on a little radar screen. I wanted to see how close real hardware could get, and how far the idea goes past a video game. The hardware is Seeed's MR60BHA2 kit, a 60 GHz radar module with a XIAO ESP32-C6 on the back, plus a Grove 1.12 inch 128x128 OLED on the kit's single Grove port. Firmware is Arduino C++ on top of Seeed's mmWave library and U8g2.",
     techStack: ["Arduino C++", "XIAO ESP32-C6", "Seeed MR60BHA2 (60 GHz)", "SH1107 128x128 OLED", "U8g2", "Seeed mmWave library"],
     clientQuote: null,
     impact: [
@@ -152,7 +152,7 @@ export const DEEP_PROJECTS = [
     sections: [
       {
         heading: "The Idea",
-        body: "I wanted a radar screen I could hold. The MR60BHA2 is a 60 GHz mmWave module built for sleep monitoring. It picks up the tiny chest movement from breathing and your heartbeat, and it also tracks up to three people as x/y positions in the room. Pair that with a small OLED and you get the classic radar sweep, except the dots are real people.",
+        body: "In Call of Duty, the Heartbeat Sensor is a handheld you hold out in front of you, and anyone nearby shows up as a blip on a sweeping radar. I wanted to build the real version. The MR60BHA2 is a 60 GHz mmWave module built for sleep monitoring. It picks up the tiny chest movement from breathing and your heartbeat, and it also tracks up to three people as x/y positions in the room. Pair that with a small OLED and you get the classic radar sweep, except the dots are real people.",
       },
       {
         heading: "Bring-Up: The Board Nobody Could See",
@@ -190,7 +190,7 @@ void loop() {
       },
       {
         heading: "Where It Stands",
-        body: "It works on USB power: the sweep, live dots, target count and distance, and vitals when you hold still. Still to do: a proper walk test out to 3 to 4 m, a battery so it actually fits in a pocket, and probably a color OLED. The current screen can only light up white, and a green radar with a fading phosphor trail is the whole point.",
+        body: "It works on USB power: the sweep, live dots, target count and distance, and vitals when you hold still. Next up is a handheld enclosure with a grip and a battery, so it actually feels like the one in the game. After that: a proper walk test out to 3 to 4 m, and probably a color OLED. The current screen can only light up white, and a green radar with a fading phosphor trail is the whole point.",
       },
     ],
   },
