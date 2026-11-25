@@ -129,7 +129,7 @@ export const ALL_PROJECTS = [
       title: "First Financial Bank USA",
       year: "Summer 2026",
       tags: ["Product","Fintech","Full-Stack","PM"],
-      desc: "Product Manager intern. Led a 7-person team through a 13-week sprint to build a fully functioning fintech deposit product, an IRA deposit platform targeting $50M in retail deposits, and cleared all 3 executive gate reviews on schedule. We handed off all code and research to the bank, and the product is now being developed for market.",
+      desc: "Product Manager on a contracted software project. Proposed the product and hired 6 interns across frontend, backend, quantitative modeling, and compliance, then led a 13-week build of a fully functioning fintech deposit product targeting $50M in retail IRA deposits. Cleared all 3 executive gate reviews on schedule and handed off all code, research, and documentation to an external software firm. The product is now being developed for market.",
     },
   ]},
 ];
