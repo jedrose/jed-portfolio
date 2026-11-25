@@ -37,7 +37,7 @@ export default function ProjectDetail({ project, onBack, onNavigate }) {
         <div style={{ width: 8, height: 8, borderRadius: "50%", background: c, boxShadow: `0 0 8px ${c}` }} />
         <span style={{ fontFamily: PF, fontSize: 8, color: c, letterSpacing: "0.12em" }}>PROJECT.EXE</span>
         {onNavigate && (
-          <div style={{ marginLeft: "auto" }}>
+          <div className="hdr-nav" style={{ marginLeft: "auto" }}>
             <NavBar activeId="projects" onNavigate={onNavigate} />
           </div>
         )}

@@ -71,6 +71,9 @@ export default function App() {
 
   useEffect(() => { document.title = routeTitle(route); }, [route]);
 
+  // Navigating to a page (e.g. back/forward or editing the URL) dismisses the intro
+  useEffect(() => { if (route.section) setBooted(true); }, [route.section]);
+
   useEffect(() => {
     const onResize = () => setScale(getScale());
     window.addEventListener("resize", onResize);
@@ -153,6 +156,36 @@ export default function App() {
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* Phones: navigation becomes a single row of four equal tabs */
+        @media (max-width: 600px) {
+          .navbar {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px !important;
+            width: 100%;
+          }
+          .navbar button {
+            font-size: 7px !important;
+            letter-spacing: 0.04em !important;
+            padding: 0 2px !important;
+            min-height: 40px !important;
+            white-space: nowrap;
+          }
+          .navbar--floating {
+            left: 12px !important;
+            right: 12px !important;
+            bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+            transform: none !important;
+            max-width: none !important;
+            width: auto !important;
+          }
+          /* Section headers: title + BACK on top, tabs full-width below */
+          .hdr-right { display: contents !important; }
+          .hdr-back { order: 1; margin-left: auto; }
+          .hdr-right > .navbar { order: 2; flex-basis: 100%; }
+          .hdr-nav { margin-left: 0 !important; flex-basis: 100%; }
+        }
       `}</style>
 
       {/* Arcade room — scaled to fill viewport */}

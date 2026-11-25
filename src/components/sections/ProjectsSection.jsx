@@ -145,7 +145,7 @@ export default function ProjectsSection({ color, onClose, onNavigate, openProjec
       <Header title="PROJECTS.EXE" color={color} onClose={onClose} activeId="projects" onNavigate={navigate} />
       <div style={{ maxWidth: 820, margin: "0 auto", padding: "2.5rem clamp(1rem, 5vw, 2.5rem) 5rem" }}>
         <p style={{ fontSize: 15, color: TEXT_MUTED, marginBottom: "3rem", lineHeight: 1.75 }}>
-          A selection of what I have built and led. More coming.
+          A selection of what I have built and led. Cards marked View Project open a full case study.
         </p>
 
         {ALL_PROJECTS.map(group => (
@@ -164,9 +164,6 @@ export default function ProjectsSection({ color, onClose, onNavigate, openProjec
           </div>
         ))}
 
-        <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 10, padding: "2rem", textAlign: "center" }}>
-          <div style={{ fontFamily: PF, fontSize: 7, color: "#374151", letterSpacing: "0.12em" }}>MORE COMING SOON</div>
-        </div>
       </div>
     </div>
   );

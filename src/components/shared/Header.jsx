@@ -17,9 +17,10 @@ export default function Header({ title, color, onClose, activeId, onNavigate }) 
     }}>
       <div style={{ width: 8, height: 8, borderRadius: "50%", background: color, boxShadow: `0 0 8px ${color}` }} />
       <span style={{ fontFamily: PF, fontSize: 9, color: color, letterSpacing: "0.12em" }}>{title}</span>
-      <div style={{ marginLeft: "auto", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+      <div className="hdr-right" style={{ marginLeft: "auto", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
         {onNavigate && <NavBar activeId={activeId} onNavigate={onNavigate} />}
         <button
+          className="hdr-back"
           onClick={onClose}
           style={{
             fontFamily: PF, fontSize: 6, background: "none",

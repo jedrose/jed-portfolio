@@ -37,7 +37,7 @@ export const ALL_PROJECTS = [
       year: "Summer 2026 - Now",
       tags: ["Raspberry Pi","Arduino","ROS2","Python","C++","Lidar"],
       status: "IN PROGRESS",
-      desc: "Building an autonomous inventory robot for a real customer, Payless Decor ($4.4M of stock, 1,598 SKUs): drive the aisles overnight, read barcodes off the racking, push counts into their inventory system. Raspberry Pi + Arduino Uno, ROS2, RPLIDAR A1M8. Currently in sensor bring-up.",
+      desc: "Building an autonomous inventory robot for a real customer, Payless Decor ($4.4M of stock, 1,598 SKUs): drive the aisles overnight, read barcodes off the racking, push counts into their inventory system. Raspberry Pi + Arduino Uno, ROS2, RPLIDAR A1M8. Now driving.",
     },
     {
       deepId: "attendance-counter",
@@ -57,7 +57,7 @@ export const ALL_PROJECTS = [
       title: "Midtown EV Rally",
       year: "2022 - 2024",
       tags: ["Hardware","EV","Electrical"],
-      desc: "Co-founded Atlanta's first high school EV club. Raised $25K from Mercedes-Benz and Rivian. Engineered a complete brushless DC drivetrain wiring system. Competed nationally.",
+      desc: "Co-founded Atlanta's first high school EV club. Raised $25K from Mercedes-Benz and Rivian. Engineered the full brushless DC drivetrain wiring system and prototyped its PCBs for a 65 MPH car that placed in national endurance races.",
     },
   ]},
   { cat: "DEFENSE & MDT", color: "#2563eb", items: [
@@ -79,14 +79,14 @@ export const ALL_PROJECTS = [
       year: "2025 - Now",
       tags: ["Hardware","Drones","Autonomy","Embedded"],
       status: "IN PROGRESS",
-      desc: "Leading hardware development of a drone swarm kit for AG3, an industry-partnered MDT project. Scoped the sponsor's requirements into deliverables and directing the team through design, integration, and field testing.",
+      desc: "Leading hardware development of a drone swarm kit for AG3, an industry-partnered MDT project. Scoped the sponsor's requirements into deliverables and directing the team through design, integration, and field testing in GPS-denied environments.",
     },
     {
-      title: "MDT — Hypersonic LLM Pipeline",
+      title: "MDT — Hypersonic Data & LLM Pipeline (North Wind)",
       year: "2025 - Now",
-      tags: ["LLM","AI","Data Engineering","Hypersonics"],
+      tags: ["LLM","Data Engineering","Hypersonics","Wind Tunnel"],
       status: "IN PROGRESS",
-      desc: "Leading a data cleaning and LLM pipeline that simulates design and manufacturing processes for a hypersonic startup. Bridging AI tooling with defense-grade engineering workflows.",
+      desc: "Industry-partnered MDT project for North Wind, a hypersonics startup. Leading a wind tunnel data cleaning and LLM pipeline that simulates design and manufacturing processes, bridging AI tooling with defense-grade engineering workflows. Scoped the sponsor's requirements into deliverables for a 6-10 person student team.",
     },
     {
       title: "MDT — AUV Research Platform (Booz Allen)",
@@ -94,13 +94,6 @@ export const ALL_PROJECTS = [
       tags: ["Autonomy","AUV","Industry Partner"],
       status: "IN PROGRESS",
       desc: "Industry-partnered MDT project with Booz Allen Hamilton to build an autonomous underwater vehicle research platform. Led outreach and technical scoping, turning the sponsor's requirements into deliverables for a 6-10 person student team.",
-    },
-    {
-      title: "MDT — Wind Tunnel Data Pipeline (North Wind)",
-      year: "2025 - Now",
-      tags: ["Data Engineering","Aerodynamics","Industry Partner"],
-      status: "IN PROGRESS",
-      desc: "Industry-partnered MDT project building a wind tunnel data pipeline for North Wind. Led outreach and technical scoping, turning the sponsor's requirements into deliverables for a 6-10 person student team.",
     },
   ]},
   { cat: "CONSULTING & PRODUCT", color: "#7c3aed", items: [
@@ -263,16 +256,11 @@ void loop() {
       "Investigated and scoped MCP tool integration to connect Capitol AI with external platforms. Competitive analysis against n8n, CrewAI, Langdock, and Lindy with a full differentiation strategy",
     ],
     images: [
-      { src: "/capitol-ai-imgs/recap_image10.png", contain: true },   // 0 - login screen
-      { src: "/capitol-ai-imgs/recap_image5.png", contain: true },    // 1 - dashboard
-      { src: "/capitol-ai-imgs/recap_image7.png", contain: true },    // 2 - onboarding preferences
-      { src: "/capitol-ai-imgs/recap_image6.png", contain: true },    // 3 - connect accounts
-      { src: "/capitol-ai-imgs/recap_image8.png", contain: true },    // 4 - Cappy chatbot
-      { src: "/capitol-ai-imgs/recap_image12.png", contain: true },   // 5 - Stockflow AI workflow
-      { src: "/capitol-ai-imgs/deliverable_image11.png", contain: true }, // 6 - Capitol AI platform
-      { src: "/capitol-ai-imgs/deliverable_image19.png", contain: true }, // 7 - workflow nodes (EY)
-      { src: "/capitol-ai-imgs/deliverable_image24.png", contain: true }, // 8 - LinkedIn workflow
-      { src: "/capitol-ai-imgs/deliverable_image25.png", contain: true }, // 9 - MCP/resume workflow
+      { src: "/capitol-ai-imgs/recap_image8.png", contain: true },         // 0 - Cappy chatbot
+      { src: "/capitol-ai-imgs/recap_image12.png", contain: true },        // 1 - Stockflow AI workflow
+      { src: "/capitol-ai-imgs/deliverable_image11.png", contain: true },  // 2 - Capitol AI platform (emails blurred)
+      { src: "/capitol-ai-imgs/deliverable_image19.png", contain: true },  // 3 - workflow nodes (EY)
+      { src: "/capitol-ai-imgs/deliverable_image24.png", contain: true },  // 4 - LinkedIn workflow
     ],
     githubUrl: "https://github.com/Kanishkkandoi52/Stockflow_Tracker",
     liveDemo: {
@@ -293,17 +281,17 @@ void loop() {
       {
         heading: "Cappy: Designing the Capitol AI Chatbot",
         body: "One of the most distinct things we built was Cappy, the Capitol AI chatbot. I designed Cappy as a character — a friendly blue robot persona that would give the platform a human face and make the onboarding feel less like reading documentation and more like getting help from someone who knew the product. Cappy was integrated into the Stockflow Tracker as the primary interface for market questions and portfolio guidance. The idea was simple: if a user doesn't know where to start, give them something they can just talk to.",
-        images: [4],
+        images: [0],
       },
       {
         heading: "Engagement 2: Onboarding UX & Training Academy",
         body: "For the second engagement I moved into Head PM. Capitol AI had built a Training Academy to walk new users through the platform, and we ran 100+ user interviews to evaluate it module by module. The findings were detailed and structural: users felt overwhelmed by the volume of content, the audio felt robotic, the interactive and video portions were redundant, and expert vs. beginner users needed completely different paths. We delivered module-by-module UX reports, bug documentation, a full user manual, and a document of use case ideas to help the team prioritize. The central recommendation: segment users upfront so the experience matched their skill level from the first screen.",
-        images: [6, 5],
+        images: [2, 1],
       },
       {
         heading: "Engagement 3: AI Workflows & Differentiation Strategy",
         body: "As Strategic Lead on the third engagement, the work got more technical. We built complex AI workflows directly on the Capitol AI platform: a LinkedIn job finder, a resume improver with live web search, a connection outreach reminder tool, and a casing prep agent. We also investigated MCP tool integration, scoping how Capitol AI could let users connect to external platforms with a single connection. On the strategy side, we ran a competitive analysis against n8n, CrewAI, Langdock, and Lindy. Every competitor was converging on the same raw capability. The differentiator had to be ease of entry for non-technical users, and we built the recommendations around that.",
-        images: [7, 8],
+        images: [3, 4],
       },
       {
         heading: "What I Took Away",
@@ -495,12 +483,12 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
     coverImage: null,
     category: "ROBOTICS / EMBEDDED",
     tags: ["ROS2", "Raspberry Pi", "Arduino", "LIDAR", "SLAM", "Python", "C++"],
-    blurb: "Autonomous inventory robot for a real customer, Payless Decor. It is being built to drive the warehouse aisles on its own, read barcodes off the racking, and push counts into the inventory system they already use. Currently in sensor bring-up.",
+    blurb: "Autonomous inventory robot for a real customer, Payless Decor. It is being built to drive the warehouse aisles on its own, read barcodes off the racking, and push counts into the inventory system they already use. It is now driving, with mapping and barcode reading next.",
     context: "Independent hardware project, started Summer 2026 and still going. Payless Decor counts their warehouse inventory fully by hand today. I am building the whole thing end to end: chassis, power system, firmware, ROS2 navigation, mast-mounted barcode camera, and the dashboard that the counts land in. This page is written as the build goes, so the status section is current rather than aspirational.",
     techStack: ["ROS2", "Python", "C++", "Raspberry Pi", "Arduino Uno Rev3 (ATmega328P)", "RPLIDAR A1M8", "SLAM"],
     clientQuote: null,
     impact: [
-      "Caught a vendor encoder spec error before it reached navigation tuning: the ATmega328P has two hardware interrupt pins, so 4x quadrature decoding across two wheel encoders was never physically possible. Redesigned for 2x decoding and corrected the odometry constant to 0.62 mm per count",
+      "Caught a vendor encoder spec error before it reached navigation tuning: the ATmega328P has two hardware interrupt pins, so 4x quadrature decoding across two wheel encoders was never physically possible. Redesigned for 2x decoding and corrected the odometry constant to 0.62 mm per count. Then wrote firmware to correct odometry drift across all four drive motors",
       "Sized power protection around the real worst case, all four motors stalled at 12.8 A, and dropped the fuse from 40 A to 20 A specifically so the fuse trips before the BMS does",
       "Built the Pi-to-Uno serial link with framed motor commands, a 20 Hz odometry stream, and a 500 ms watchdog that halts drive on link loss",
       "5 hardware and spec defects diagnosed during bring-up, including a chassis that shipped with misaligned motor inserts and the wrong bearings",
@@ -547,12 +535,12 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
       },
       {
         heading: "What Went Wrong",
-        body: "The chassis shipped with misaligned motor inserts and the wrong bearings, so the first real task was sourcing replacements instead of building. Odometry drift has been a persistent fight and ties directly back to the encoder rework above. The mast is an open problem. Product goes up to 22 ft, so a ground robot is always reaching, and raising the camera on a mast to see more of the racking also raised the center of gravity and made the robot worse to drive. I have not solved that tradeoff yet, and I am not going to pretend a taller robot with a heavier top is fine. Five hardware and spec defects total have been diagnosed during bring-up. Most of the schedule so far has gone to finding them rather than to writing navigation code.",
+        body: "The chassis shipped with misaligned motor inserts and the wrong bearings, so the first real task was sourcing replacements instead of building. Odometry drift was a persistent fight that tied directly back to the encoder rework above, until I wrote firmware to correct it across all four drive motors. The mast is an open problem. Product goes up to 22 ft, so a ground robot is always reaching, and raising the camera on a mast to see more of the racking also raised the center of gravity and made the robot worse to drive. I have not solved that tradeoff yet, and I am not going to pretend a taller robot with a heavier top is fine. Five hardware and spec defects total have been diagnosed during bring-up. Most of the schedule so far has gone to finding them rather than to writing navigation code.",
         // images: [3],
       },
       {
         heading: "Where It Stands",
-        body: "Sensor bring-up. It is not driving under teleop yet. The LIDAR is verified and publishing clean scan geometry at about 7 Hz, which is the one subsystem I would call done. Power and firmware are designed and wired but not validated under load. Barcode reading and the dashboard are not built yet. Calling this a working inventory robot today would be a lie, so I am not going to.",
+        body: "It drives. Bring-up is done: the power system, the Pi-to-Uno link, and the drive firmware are running the robot, and the firmware corrects odometry drift across all four motors. The LIDAR is verified and publishing clean scan geometry at about 7 Hz. What is not built yet is the part that makes it an inventory system: mapping the warehouse, reading barcodes, and the dashboard. Calling this a working inventory robot today would be a lie, so I am not going to. Calling it a working robot is fair.",
         // images: [2],
         // videos: [
         //   { src: "/warehouse-robot-imgs/lidar-scan.mp4", label: "LIDAR SCAN", type: "video/mp4" },
@@ -561,7 +549,7 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
       },
       {
         heading: "What Is Next",
-        body: "Nearest goal is simple: get it driving. Teleop first, then closed-loop odometry, then SLAM on the real warehouse floor. After that the barcode pipeline, which is messier than it sounds: labels are a mix of Code 39 and Code 128, some SKUs are labeled with GTINs and others with Payless Decor's own SKU numbers, and some barcodes are one unit while others sit on a multipack where one scan means a box of 6. Then the dashboard, which is the point where it stops being a robot and starts being an inventory system. I also want to find out whether this works as a product for warehouses beyond this one. Payless Decor is one customer with one building. That is enough to build against and not enough to know if it generalizes.",
+        body: "Now that it drives, the next goal is SLAM on the real warehouse floor so it can find its own way down the aisles. After that the barcode pipeline, which is messier than it sounds: labels are a mix of Code 39 and Code 128, some SKUs are labeled with GTINs and others with Payless Decor's own SKU numbers, and some barcodes are one unit while others sit on a multipack where one scan means a box of 6. Then the dashboard, which is the point where it stops being a robot and starts being an inventory system. I also want to find out whether this works as a product for warehouses beyond this one. Payless Decor is one customer with one building. That is enough to build against and not enough to know if it generalizes.",
         // images: [4],
       },
       {
@@ -576,55 +564,61 @@ export const RESUME_PDF_URL = "/resume.pdf";
 
 export const PITCH = "Electrical engineering student building at the intersection of defense tech, hardware, and product.";
 
+// Mirrors the Skills line on the resume
+export const SKILLS = [
+  { group: "HARDWARE", items: ["Circuit design","PCB schematic capture & layout","Fuse sizing","Soldering & crimping","BLDC motor drivetrains","Hardware bring-up & fault isolation","Sensor integration (LIDAR, ultrasonic, IMU, camera)","UART & I2C","Oscilloscope","Multimeter","3D printing"] },
+  { group: "SOFTWARE & TOOLS", items: ["C++","Python","MATLAB","LTspice","Altium","KiCad","ROS2","Arduino","Raspberry Pi","Onshape (CAD)","Linux","Git","TypeScript","React"] },
+];
+
 export const HOBBIES = ["Vinyls","Backpacking","Basketball","Golf","Video Production","App Dev"];
 
 export const TOP_FILMS = [
   {
     title: "Reservoir Dogs", year: 1992, rating: 4, director: "Tarantino",
-    poster: "https://media.themoviedb.org/t/p/w500/xi8Iu6qyTfyZVDVy60raIOYJJmk.jpg",
+    poster: "/media/film-reservoir-dogs.jpg",
   },
   {
     title: "City of God", year: 2002, rating: 5, director: "Meirelles",
-    poster: "https://media.themoviedb.org/t/p/w500/k7eYdWvhYQyRQoU2TB2A2Xu2TfD.jpg",
+    poster: "/media/film-city-of-god.jpg",
   },
   {
     title: "The Prestige", year: 2006, rating: 4.5, director: "Nolan",
-    poster: "https://media.themoviedb.org/t/p/w500/tRNlZbgNCNOpLpbPEz5L8G8A0JN.jpg",
+    poster: "/media/film-the-prestige.jpg",
   },
   {
     title: "Memento", year: 2000, rating: 5, director: "Nolan",
-    poster: "https://media.themoviedb.org/t/p/w500/fKTPH2WvH8nHTXeBYBVhawtRqtR.jpg",
+    poster: "/media/film-memento.jpg",
   },
   {
     title: "Mulholland Drive", year: 2001, rating: 4.5, director: "Lynch",
-    poster: "https://media.themoviedb.org/t/p/w500/x7A59t6ySylr1L7aubOQEA480vM.jpg",
+    poster: "/media/film-mulholland-drive.jpg",
   },
 ];
 
 export const TOP_ARTISTS = [
   {
     name: "Kanye West", genre: "Hip-Hop / Rap",
-    image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Kanye_West_at_the_2009_Tribeca_Film_Festival_%28crop_2%29.jpg",
+    image: "/media/artist-kanye-west.jpg",
     gradient: "linear-gradient(135deg, #1a0533 0%, #4a1060 100%)",
   },
   {
     name: "The Smiths", genre: "Indie / Post-Punk",
-    image: "https://upload.wikimedia.org/wikipedia/commons/6/68/The_Smiths_%281984_Sire_publicity_photo%29_002.jpg",
+    image: "/media/artist-the-smiths.jpg",
     gradient: "linear-gradient(135deg, #0f2010 0%, #2d5a1b 100%)",
   },
   {
     name: "Chris Stussy", genre: "Deep House / Techno",
-    image: "https://lastfm.freetls.fastly.net/i/u/avatar170s/2ad819f6e8c89bb53cdfaaed5943473e",
+    image: null,
     gradient: "linear-gradient(135deg, #001233 0%, #023e8a 100%)",
   },
   {
     name: "Nine Vicious", genre: "Experimental Rap",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Nine_Vicious_July_11th_2025_%28cropped%29.jpg/250px-Nine_Vicious_July_11th_2025_%28cropped%29.jpg",
+    image: "/media/artist-nine-vicious.jpg",
     gradient: "linear-gradient(135deg, #1a0010 0%, #6b0020 100%)",
   },
   {
     name: "Pz'", genre: "Experimental Rap",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Pz%27_performance_2026_%C3%98Way.png/250px-Pz%27_performance_2026_%C3%98Way.png",
+    image: null,
     gradient: "linear-gradient(135deg, #001a1a 0%, #005f5f 100%)",
   },
 ];

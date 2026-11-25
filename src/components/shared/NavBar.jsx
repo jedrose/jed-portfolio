@@ -4,6 +4,7 @@ export default function NavBar({ activeId, onNavigate, floating }) {
   return (
     <nav
       aria-label="Sections"
+      className={floating ? "navbar navbar--floating" : "navbar"}
       style={{
         display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 6,
         ...(floating ? {

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../shared/Header";
-import { PF, SANS, HOBBIES, TOP_FILMS, TOP_ARTISTS, PITCH, CONTACT_LINKS } from "../../data/content";
+import { PF, SANS, HOBBIES, SKILLS, TOP_FILMS, TOP_ARTISTS, PITCH, CONTACT_LINKS } from "../../data/content";
 
 const DARK = "#0d1117";
 const CARD = "#161b22";
@@ -87,6 +87,26 @@ export default function AboutSection({ color, onClose, onNavigate }) {
               }}>
                 <div style={{ fontFamily: PF, fontSize: 6, color, letterSpacing: "0.12em", marginBottom: 10 }}>{k}</div>
                 <div style={{ fontSize: 15, color: TEXT_PRIMARY, fontWeight: 600 }}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Skills */}
+        <div style={{ marginBottom: "3rem" }}>
+          <SectionLabel color={color}>SKILLS</SectionLabel>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+            {SKILLS.map(({ group, items }) => (
+              <div key={group}>
+                <div style={{ fontFamily: PF, fontSize: 6, color: TEXT_MUTED, letterSpacing: "0.12em", marginBottom: 10 }}>{group}</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {items.map(it => (
+                    <span key={it} style={{
+                      fontSize: 13, padding: "5px 12px", background: CARD,
+                      border: `1px solid ${BORDER}`, borderRadius: 6, color: TEXT_PRIMARY, fontWeight: 500,
+                    }}>{it}</span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
