@@ -501,7 +501,7 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
     clientQuote: null,
     impact: [
       "Caught a vendor encoder spec error before it reached navigation tuning: the ATmega328P has two hardware interrupt pins, so 4x quadrature decoding across two wheel encoders was never physically possible. Redesigned for 2x decoding and corrected the odometry constant to 0.62 mm per count",
-      "Sized power protection around the real worst case, all four motors stalled at 12.8 A, and dropped the fuse from 40 A to 20-25 A specifically so the fuse trips before the BMS does",
+      "Sized power protection around the real worst case, all four motors stalled at 12.8 A, and dropped the fuse from 40 A to 20 A specifically so the fuse trips before the BMS does",
       "Built the Pi-to-Uno serial link with framed motor commands, a 20 Hz odometry stream, and a 500 ms watchdog that halts drive on link loss",
       "5 hardware and spec defects diagnosed during bring-up, including a chassis that shipped with misaligned motor inserts and the wrong bearings",
       "LIDAR verified publishing clean scan geometry at about 7 Hz",
@@ -538,7 +538,7 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
       },
       {
         heading: "Decision 2: Sizing the Fuse to Fail First",
-        body: "Worst case on this platform is all four motors stalled at once, which pulls 12.8 A. I sized the protection around that number and then dropped the fuse from 40 A down to the 20-25 A range. A 40 A fuse would have sat above the BMS cutoff, so in a real overcurrent event the battery management system trips first. That is the wrong failure. A blown fuse is obvious: you see it, you swap it, you know exactly what happened. A BMS cutout looks like the robot just died for no reason, and you go hunting through firmware and wiring for a fault that was never there. I would rather lose a fuse than lose an afternoon.",
+        body: "Worst case on this platform is all four motors stalled at once, which pulls 12.8 A. I sized the protection around that number and then dropped the fuse from 40 A down to 20 A. A 40 A fuse would have sat above the BMS cutoff, so in a real overcurrent event the battery management system trips first. That is the wrong failure. A blown fuse is obvious: you see it, you swap it, you know exactly what happened. A BMS cutout looks like the robot just died for no reason, and you go hunting through firmware and wiring for a fault that was never there. I would rather lose a fuse than lose an afternoon.",
         // images: [1],
       },
       {
