@@ -32,32 +32,32 @@ export const ALL_PROJECTS = [
       desc: "A real-life take on the Call of Duty Heartbeat Sensor. A palm-sized 60 GHz radar that tracks people as live dots on a sweeping OLED screen, and reads heart and breathing rate when you sit still. XIAO ESP32-C6, Seeed MR60BHA2, U8g2.",
     },
     {
+      deepId: "warehouse-robot",
+      title: "Warehouse Vision Robot",
+      year: "Summer 2026 - Now",
+      tags: ["Raspberry Pi","Arduino","ROS2","Python","C++","Lidar"],
+      status: "IN PROGRESS",
+      desc: "Building an autonomous inventory robot for a real customer, Payless Decor ($4.4M of stock, 1,598 SKUs): drive the aisles overnight, read barcodes off the racking, push counts into their inventory system. Raspberry Pi + Arduino Uno, ROS2, RPLIDAR A1M8. Currently in sensor bring-up.",
+    },
+    {
       deepId: "attendance-counter",
       title: "Sensor-Based Attendance Counter",
       year: "Spring 2025",
       tags: ["Arduino","C++","CAD","Embedded Systems"],
-      desc: "Designed and built a real-time bidirectional people counter using dual ultrasonic sensors and an Arduino, 3D-printed into a door-frame housing. Eliminates gameable QR code attendance.",
+      desc: "Built a real-time bidirectional people counter from dual ultrasonic sensors and an Arduino in a 3D-printed door-frame housing. 98% counting accuracy in lecture hall trials, under $40 in parts. Eliminates gameable QR code attendance.",
     },
     {
       deepId: "pneumonia",
       title: "Robust Deep Learning for Pneumonia Detection",
       year: "2023",
       tags: ["TensorFlow","CNN","Python","ML"],
-      desc: "Lifted field accuracy from 74.7% to 98.8% by engineering rotation and rendering-shift augmentation into a clinical CNN pipeline. No new labeled data required.",
-    },
-    {
-      deepId: "warehouse-robot",
-      title: "Warehouse Vision Robot",
-      year: "Summer 2026 - Now",
-      tags: ["Raspberry Pi","Arduino","ROS2","Python","C++","Lidar"],
-      status: "IN PROGRESS",
-      desc: "Autonomous inventory robot for a real customer, Payless Decor. Drives warehouse aisles on its own, reads barcodes off the racking, and pushes counts into their existing inventory system. Raspberry Pi + Arduino Uno, ROS2, RPLIDAR A1M8.",
+      desc: "Lifted field accuracy from 74.7% to 98.8% by engineering rotation and rendering-shift augmentation into a chest X-ray CNN's training pipeline. No new labeled data required.",
     },
     {
       title: "Midtown EV Rally",
       year: "2022 - 2024",
       tags: ["Hardware","EV","Electrical"],
-      desc: "Co-founded Atlanta's first collegiate EV club. Raised $25K from Mercedes-Benz and Rivian. Engineered a complete brushless DC drivetrain wiring system. Competed nationally.",
+      desc: "Co-founded Atlanta's first high school EV club. Raised $25K from Mercedes-Benz and Rivian. Engineered a complete brushless DC drivetrain wiring system. Competed nationally.",
     },
   ]},
   { cat: "DEFENSE & MDT", color: "#2563eb", items: [
@@ -65,7 +65,7 @@ export const ALL_PROJECTS = [
       title: "Michigan Defense Technology",
       year: "2025 - Now",
       tags: ["Defense","Leadership","DARPA","Venture"],
-      desc: "Co-founded U-M's first defense tech org. 100+ applicants, 18% acceptance. Secured exclusive events with Anduril and Palantir. Hosted Gen. H.R. McMaster on campus.",
+      desc: "Co-founded and co-lead U-M's first defense tech org. 100+ applicants, 18% acceptance. Built partnerships with Palantir, Anduril, Scale AI, Shield AI, and Antares, including exclusive events with Anduril and Palantir. Hosted Gen. H.R. McMaster on campus. Lead outreach and technical scoping for industry-partnered projects, turning sponsor requirements into deliverables for 6-10 person student teams.",
     },
     {
       title: "MDT — DARPA Research",
@@ -75,11 +75,11 @@ export const ALL_PROJECTS = [
       desc: "Leading research across 3 DARPA programs: ASIMOV (autonomous systems ethics and certification), Space-BACN (hybrid military satcom strategy), and ACE (AI copilot and human-AI teaming doctrine).",
     },
     {
-      title: "MDT — Swarm Drone Project",
+      title: "MDT — Swarm Drone Kit (AG3)",
       year: "2025 - Now",
       tags: ["Hardware","Drones","Autonomy","Embedded"],
       status: "IN PROGRESS",
-      desc: "Leading hardware development of a swarm drone system with a defense startup. Directing the team through design, integration, and field testing.",
+      desc: "Leading hardware development of a drone swarm kit for AG3, an industry-partnered MDT project. Scoped the sponsor's requirements into deliverables and directing the team through design, integration, and field testing.",
     },
     {
       title: "MDT — Hypersonic LLM Pipeline",
@@ -88,6 +88,20 @@ export const ALL_PROJECTS = [
       status: "IN PROGRESS",
       desc: "Leading a data cleaning and LLM pipeline that simulates design and manufacturing processes for a hypersonic startup. Bridging AI tooling with defense-grade engineering workflows.",
     },
+    {
+      title: "MDT — AUV Research Platform (Booz Allen)",
+      year: "2025 - Now",
+      tags: ["Autonomy","AUV","Industry Partner"],
+      status: "IN PROGRESS",
+      desc: "Industry-partnered MDT project with Booz Allen Hamilton to build an autonomous underwater vehicle research platform. Led outreach and technical scoping, turning the sponsor's requirements into deliverables for a 6-10 person student team.",
+    },
+    {
+      title: "MDT — Wind Tunnel Data Pipeline (North Wind)",
+      year: "2025 - Now",
+      tags: ["Data Engineering","Aerodynamics","Industry Partner"],
+      status: "IN PROGRESS",
+      desc: "Industry-partnered MDT project building a wind tunnel data pipeline for North Wind. Led outreach and technical scoping, turning the sponsor's requirements into deliverables for a 6-10 person student team.",
+    },
   ]},
   { cat: "CONSULTING & PRODUCT", color: "#7c3aed", items: [
     {
@@ -95,7 +109,7 @@ export const ALL_PROJECTS = [
       title: "Capitol AI: Product Strategy, UX Research & AI Workflows",
       year: "2024 - 2025",
       tags: ["Product Management","UX Research","AI Workflows","Frontend Dev"],
-      desc: "3 consecutive engagements with a YC-backed AI workflow startup. Progressed from Co-PM to Strategic Lead, running 100+ user interviews, shipping a live frontend demo, and owning platform differentiation strategy.",
+      desc: "3 consecutive engagements with a YC-backed AI workflow startup. Progressed from Co-PM to Head PM to Strategic Lead, running 100+ user interviews, shipping a live frontend demo, and owning platform differentiation strategy.",
     },
     {
       deepId: "pff",
@@ -114,9 +128,8 @@ export const ALL_PROJECTS = [
     {
       title: "First Financial Bank USA",
       year: "Summer 2026",
-      tags: ["Product","Fintech","PM"],
-      status: "IN PROGRESS",
-      desc: "Leading a 7-person team through a 13-week sprint. Full-stack IRA deposit MVP targeting $50M in retail deposits. Cleared all 3 executive gate reviews.",
+      tags: ["Product","Fintech","Full-Stack","PM"],
+      desc: "Product Manager intern. Led a 7-person team through a 13-week sprint to build a fully functioning fintech deposit product, an IRA deposit platform targeting $50M in retail deposits, and cleared all 3 executive gate reviews on schedule. We handed off all code and research to the bank, and the product is now being developed for market.",
     },
   ]},
 ];
@@ -356,8 +369,8 @@ void loop() {
     coverPosition: "center 65%",
     category: "ML / AI",
     tags: ["TensorFlow", "Keras", "CNN", "Python", "imgaug"],
-    blurb: "Solved out-of-distribution generalization in a clinical CNN, lifting field accuracy from 74.7% to 98.8% by engineering rotation and rendering-shift augmentation into the training pipeline. No new labeled data required.",
-    context: "Built during the MIT Inspirit AI Program, a 10-week research intensive mentored by MIT graduate students. Collaborated with a global team of 6 students to design, train, and harden a clinical-grade CNN for pneumonia classification from chest X-ray images.",
+    blurb: "Solved out-of-distribution generalization in a chest X-ray CNN, lifting field accuracy from 74.7% to 98.8% by engineering rotation and rendering-shift augmentation into the training pipeline. No new labeled data required.",
+    context: "Built during the MIT Inspirit AI Program, a 10-week research intensive mentored by MIT graduate students. Collaborated with a global team of 6 students to design, train, and harden a CNN for pneumonia classification from chest X-ray images.",
     techStack: ["TensorFlow", "Keras", "NumPy", "Scikit-Learn", "imgaug", "Matplotlib", "Seaborn"],
     impact: [
       "+24.1 pp generalization lift: augmented CNN recovered from 74.7% to 98.8% avg. field accuracy",
@@ -434,8 +447,8 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
     techStack: ["Arduino C++", "Ultrasonic Sensors", "Onshape (CAD)", "3D Printing", "MATLAB"],
     clientQuote: null,
     impact: [
-      "Accurate bidirectional counting: dual-sensor order-of-occlusion logic correctly distinguishes entry from exit, tested across varied walking speeds and environments",
-      "Fully self-contained hardware: 3D-printed case mounts flush on a door frame, runs on battery, no external infrastructure needed",
+      "98% counting accuracy across repeated lecture hall trials: dual-sensor order-of-occlusion logic distinguishes entry from exit across varied walking speeds and environments",
+      "Under $40 in parts, fully self-contained: 3D-printed case mounts flush on a door frame, runs on battery, no external infrastructure needed",
       "Closed the cheating loophole: physical presence at the sensor is required, no link-sharing, no form-forwarding, no proxy attendance",
     ],
     images: [
@@ -464,7 +477,7 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
       },
       {
         heading: "Testing and Results",
-        body: "We ran systematic accuracy tests across multiple environments: a standard interior door, a wider hallway entry, and varied walking speeds from slow to brisk. The device consistently distinguished entry from exit and maintained an accurate running count through dozens of trials. Battery life and sensor range were also evaluated. The final design met every requirement initialized at the start of the project.",
+        body: "We ran systematic accuracy tests across multiple environments: a standard interior door, a wider hallway entry, and varied walking speeds from slow to brisk. Across repeated lecture hall trials the device hit 98% counting accuracy, consistently distinguishing entry from exit, on a self-contained battery-powered unit built for under $40 in parts. Battery life and sensor range were also evaluated. The final design met every requirement initialized at the start of the project.",
         images: [2],
         videos: [
           { src: "/engr100-imgs/Mode Test.mp4", label: "MODE TEST", type: "video/mp4" },
@@ -482,7 +495,7 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
     coverImage: null,
     category: "ROBOTICS / EMBEDDED",
     tags: ["ROS2", "Raspberry Pi", "Arduino", "LIDAR", "SLAM", "Python", "C++"],
-    blurb: "Autonomous inventory robot for a real customer, Payless Decor. It drives the warehouse aisles on its own, reads barcodes off the racking, and pushes counts into the inventory system they already use. Currently in sensor bring-up.",
+    blurb: "Autonomous inventory robot for a real customer, Payless Decor. It is being built to drive the warehouse aisles on its own, read barcodes off the racking, and push counts into the inventory system they already use. Currently in sensor bring-up.",
     context: "Independent hardware project, started Summer 2026 and still going. Payless Decor counts their warehouse inventory fully by hand today. I am building the whole thing end to end: chassis, power system, firmware, ROS2 navigation, mast-mounted barcode camera, and the dashboard that the counts land in. This page is written as the build goes, so the status section is current rather than aspirational.",
     techStack: ["ROS2", "Python", "C++", "Raspberry Pi", "Arduino Uno Rev3 (ATmega328P)", "RPLIDAR A1M8", "SLAM"],
     clientQuote: null,
@@ -560,6 +573,8 @@ print(f"\\nAvg. Field Accuracy: {average_accuracy:.4f}")`,
 ];
 
 export const RESUME_PDF_URL = "/resume.pdf";
+
+export const PITCH = "Electrical engineering student building at the intersection of defense tech, hardware, and product.";
 
 export const HOBBIES = ["Vinyls","Backpacking","Basketball","Golf","Video Production","App Dev"];
 

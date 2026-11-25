@@ -122,23 +122,28 @@ function ProjectCard({ item, color, onOpen }) {
   );
 }
 
-export default function ProjectsSection({ color, onClose }) {
-  const [openProject, setOpenProject] = useState(null);
+export default function ProjectsSection({ color, onClose, onNavigate, openProjectId, onOpenProject }) {
+  const openProject = openProjectId ? DEEP_PROJECTS.find(d => d.id === openProjectId) : null;
+
+  // Clicking PROJECTS while inside a case study returns to the list
+  const navigate = id => (id === "projects" ? onOpenProject(null) : onNavigate(id));
 
   if (openProject) {
     return (
       <ProjectDetail
+        key={openProject.id}
         project={openProject}
         color={color}
-        onBack={() => setOpenProject(null)}
+        onBack={() => onOpenProject(null)}
+        onNavigate={navigate}
       />
     );
   }
 
   return (
     <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
-      <Header title="PROJECTS.EXE" color={color} onClose={onClose} />
-      <div style={{ maxWidth: 820, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
+      <Header title="PROJECTS.EXE" color={color} onClose={onClose} activeId="projects" onNavigate={navigate} />
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: "2.5rem clamp(1rem, 5vw, 2.5rem) 5rem" }}>
         <p style={{ fontSize: 15, color: TEXT_MUTED, marginBottom: "3rem", lineHeight: 1.75 }}>
           A selection of what I have built and led. More coming.
         </p>
@@ -146,13 +151,13 @@ export default function ProjectsSection({ color, onClose }) {
         {ALL_PROJECTS.map(group => (
           <div key={group.cat} style={{ marginBottom: "3rem" }}>
             <SectionLabel color={group.color}>{group.cat}</SectionLabel>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", gap: "1rem" }}>
               {group.items.map(item => (
                 <ProjectCard
                   key={item.title}
                   item={item}
                   color={group.color}
-                  onOpen={setOpenProject}
+                  onOpen={deep => onOpenProject(deep.id)}
                 />
               ))}
             </div>

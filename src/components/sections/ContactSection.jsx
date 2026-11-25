@@ -34,13 +34,13 @@ const ICONS = {
   ),
 };
 
-export default function ContactSection({ color, onClose }) {
+export default function ContactSection({ color, onClose, onNavigate }) {
   return (
     <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
-      <Header title="CONTACT.EXE" color={color} onClose={onClose} />
-      <div style={{ maxWidth: 600, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
+      <Header title="CONTACT.EXE" color={color} onClose={onClose} activeId="contact" onNavigate={onNavigate} />
+      <div style={{ maxWidth: 600, margin: "0 auto", padding: "2.5rem clamp(1rem, 5vw, 2.5rem) 5rem" }}>
         <p style={{ fontSize: 16, color: TEXT_MUTED, lineHeight: 1.85, marginBottom: "2.75rem", letterSpacing: "0.01em" }}>
-          Open to internships, defense tech, venture, and product roles. Always down to talk MDT or interesting projects.
+          Open to internships, defense tech, hardware, and product roles. Always down to talk MDT or interesting projects.
         </p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem", marginBottom: "3rem" }}>

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../shared/Header";
-import { PF, SANS, HOBBIES, TOP_FILMS, TOP_ARTISTS } from "../../data/content";
+import { PF, SANS, HOBBIES, TOP_FILMS, TOP_ARTISTS, PITCH, CONTACT_LINKS } from "../../data/content";
 
 const DARK = "#0d1117";
 const CARD = "#161b22";
@@ -8,11 +8,26 @@ const BORDER = "#21262d";
 const TEXT_PRIMARY = "#e6edf3";
 const TEXT_MUTED = "#8b949e";
 
-export default function AboutSection({ color, onClose }) {
+const ACTION_STYLE = {
+  display: "inline-flex", alignItems: "center", padding: "11px 20px",
+  borderRadius: 8, fontFamily: PF, fontSize: 7, letterSpacing: "0.08em",
+  fontWeight: 700, textDecoration: "none", cursor: "pointer",
+  transition: "opacity 0.15s, border-color 0.15s, transform 0.15s",
+};
+
+export default function AboutSection({ color, onClose, onNavigate }) {
+  const email    = CONTACT_LINKS.find(l => l.label === "EMAIL");
+  const linkedin = CONTACT_LINKS.find(l => l.label === "LINKEDIN");
+  const ghost = {
+    ...ACTION_STYLE, background: CARD, border: `1px solid ${BORDER}`, color: TEXT_PRIMARY,
+  };
+  const hoverOn  = e => { e.currentTarget.style.borderColor = color; e.currentTarget.style.transform = "translateY(-1px)"; };
+  const hoverOff = e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.transform = "translateY(0)"; };
+
   return (
     <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
-      <Header title="ABOUT.EXE" color={color} onClose={onClose} />
-      <div style={{ maxWidth: 760, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
+      <Header title="ABOUT.EXE" color={color} onClose={onClose} activeId="about" onNavigate={onNavigate} />
+      <div style={{ maxWidth: 760, margin: "0 auto", padding: "2.5rem clamp(1rem, 5vw, 2.5rem) 5rem" }}>
 
         {/* Headshot hero */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "2.5rem" }}>
@@ -28,6 +43,21 @@ export default function AboutSection({ color, onClose }) {
           />
           <div style={{ fontSize: 22, fontWeight: 700, color: TEXT_PRIMARY, letterSpacing: "-0.01em", marginBottom: 4 }}>Jed Roseman</div>
           <div style={{ fontSize: 13, color: TEXT_MUTED, fontWeight: 500 }}>Electrical Engineering · University of Michigan · Class of 2028</div>
+          <p style={{ fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.6, maxWidth: 520, margin: "1.25rem 0 1.5rem", textAlign: "center" }}>
+            {PITCH}
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10 }}>
+            <button
+              onClick={() => onNavigate("resume")}
+              style={{ ...ACTION_STYLE, background: color, border: `1px solid ${color}`, color: "#fff", boxShadow: `0 0 16px ${color}44` }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = "0.88"; }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
+            >
+              VIEW RESUME
+            </button>
+            <a href={email.href} style={ghost} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>EMAIL</a>
+            <a href={linkedin.href} target="_blank" rel="noreferrer" style={ghost} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>LINKEDIN</a>
+          </div>
         </div>
 
         {/* Intro */}
@@ -36,8 +66,8 @@ export default function AboutSection({ color, onClose }) {
           <p style={{ fontSize: 16, color: TEXT_PRIMARY, lineHeight: 1.85, margin: 0, fontWeight: 400 }}>
             Hey, I&#39;m Jed Roseman, a junior at the University of Michigan studying Electrical Engineering.
             I&#39;m passionate about deep tech, defense, and startups, and always looking to deepen my technical skillset.
-            Whether I&#39;m running Michigan Defense Technology, leading a software team at a bank this summer, or building
-            my own startups, I&#39;m always taking ownership of teams and products across defense, finance, and emerging tech.
+            Whether I&#39;m running Michigan Defense Technology, building an autonomous warehouse robot, or leading
+            a team that shipped a fintech deposit product for a bank, I&#39;m always taking ownership of teams and products across defense, finance, and emerging tech.
           </p>
           <p style={{ fontSize: 16, color: TEXT_MUTED, lineHeight: 1.85, margin: "1.25rem 0 0", fontWeight: 400 }}>
             My goal is to work on hard problems in national security, deep tech, and emerging industries, orchestrating
@@ -48,8 +78,8 @@ export default function AboutSection({ color, onClose }) {
         {/* Quick stats */}
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>QUICK STATS</SectionLabel>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem" }}>
-            {[["U OF M", "Class of 2028"], ["MAJOR", "Electrical Eng."], ["LOCATION", "Ann Arbor, MI"]].map(([k, v]) => (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "1rem" }}>
+            {[["U OF M", "Class of 2028"], ["MAJOR", "Electrical Eng."], ["MAJOR GPA", "3.91"], ["LOCATION", "Ann Arbor, MI"]].map(([k, v]) => (
               <div key={k} style={{
                 background: CARD, border: `1px solid ${BORDER}`,
                 borderRadius: 10, padding: "1.25rem",
@@ -84,16 +114,16 @@ export default function AboutSection({ color, onClose }) {
         {/* Gallery */}
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>GALLERY</SectionLabel>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.875rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))", gap: "0.875rem" }}>
             {[
-              { src: "/photos/backpacking.png", alt: "Backpacking at Olympic National Park" },
-              { src: "/photos/florence.png", alt: "Florence, Italy — Duomo" },
-              { src: "/photos/camping.png", alt: "Hammock camping" },
+              { src: "/photos/backpacking.jpg", alt: "Backpacking at Olympic National Park" },
+              { src: "/photos/florence.jpg", alt: "Florence, Italy — Duomo" },
+              { src: "/photos/camping.jpg", alt: "Hammock camping" },
               { src: "/photos/hackathon photo.jpg", alt: "Hackathon" },
               { src: "/photos/car.jpg", alt: "EVR autocross racing" },
               { src: "/photos/mdt group photo.jpg", alt: "Michigan Defense Technology" },
-              { src: "/photos/michigan national chip.png", alt: "Michigan National Championship" },
-              { src: "/photos/EVR pic.png", alt: "EVR" },
+              { src: "/photos/michigan national chip.jpg", alt: "Michigan National Championship" },
+              { src: "/photos/EVR pic.jpg", alt: "EVR" },
               { src: "/photos/first-pc-build.jpg", alt: "Building my first PC" },
             ].map(p => (
               <div key={p.src} style={{ borderRadius: 10, overflow: "hidden", border: `1px solid ${BORDER}` }}>
@@ -126,7 +156,7 @@ export default function AboutSection({ color, onClose }) {
               </svg>
             </a>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.75rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))", gap: "0.75rem" }}>
             {TOP_FILMS.map((film) => (
               <FilmCard key={film.title} film={film} color={color} />
             ))}
@@ -136,7 +166,7 @@ export default function AboutSection({ color, onClose }) {
         {/* Current Rotation */}
         <div style={{ marginBottom: "3rem" }}>
           <SectionLabel color={color}>CURRENT ROTATION</SectionLabel>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.75rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))", gap: "0.75rem" }}>
             {TOP_ARTISTS.map((artist) => (
               <ArtistCard key={artist.name} artist={artist} color={color} />
             ))}

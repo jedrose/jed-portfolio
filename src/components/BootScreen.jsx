@@ -82,8 +82,14 @@ export default function BootScreen({ onDone }) {
           PRESS START
         </div>
       )}
-      <div style={{ fontFamily:PF, fontSize:6, color:"#1a2535", marginTop:"1.5rem", letterSpacing:"0.1em" }}>
-        CLICK OR PRESS ENTER TO SKIP
+      <div style={{ marginTop:"1.5rem", textAlign:"center" }}>
+        <div style={{ display:"inline-block", fontFamily:PF, fontSize:8, color:"#94a3b8", letterSpacing:"0.12em",
+          border:"1px solid #334155", borderRadius:4, padding:"10px 16px" }}>
+          SKIP INTRO ▸
+        </div>
+        <div style={{ fontFamily:PF, fontSize:6, color:"#475569", marginTop:10, letterSpacing:"0.1em" }}>
+          OR PRESS ENTER
+        </div>
       </div>
     </div>
   );

@@ -7,12 +7,18 @@ const BORDER = "#21262d";
 const TEXT_PRIMARY = "#e6edf3";
 const TEXT_MUTED = "#8b949e";
 
-export default function ResumeSection({ color, onClose }) {
+// Phone browsers don't render embedded PDFs reliably (iOS shows page 1 only,
+// Android shows nothing), so small/touch screens get an open-in-viewer card instead.
+const canEmbedPdf = () =>
+  typeof window === "undefined" || !window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
+
+export default function ResumeSection({ color, onClose, onNavigate }) {
+  const embed = canEmbedPdf();
   return (
     <div style={{ position: "fixed", inset: 0, background: DARK, overflowY: "auto", zIndex: 50, fontFamily: SANS }}>
-      <Header title="RESUME.EXE" color={color} onClose={onClose} />
+      <Header title="RESUME.EXE" color={color} onClose={onClose} activeId="resume" onNavigate={onNavigate} />
 
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "2.5rem 2.5rem 5rem" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "2.5rem clamp(1rem, 5vw, 2.5rem) 5rem" }}>
 
         {/* Title + subtitle */}
         <div style={{ marginBottom: "2rem", textAlign: "center" }}>
@@ -25,7 +31,7 @@ export default function ResumeSection({ color, onClose }) {
         </div>
 
         {/* Action buttons */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: "2rem" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginBottom: "2rem" }}>
           <a
             href={RESUME_PDF_URL}
             download="Jedidiah_Roseman_Resume.pdf"
@@ -96,17 +102,36 @@ export default function ResumeSection({ color, onClose }) {
             </div>
           </div>
 
-          {/* PDF embed */}
-          <embed
-            src={`${RESUME_PDF_URL}#toolbar=0&navpanes=0&scrollbar=0`}
-            type="application/pdf"
-            style={{
-              width: "100%",
-              height: 780,
-              border: "none",
-              display: "block",
-            }}
-          />
+          {/* PDF embed (desktop) or tap-to-open card (phones) */}
+          {embed ? (
+            <embed
+              src={`${RESUME_PDF_URL}#toolbar=0&navpanes=0&scrollbar=0`}
+              type="application/pdf"
+              style={{
+                width: "100%",
+                height: 780,
+                border: "none",
+                display: "block",
+              }}
+            />
+          ) : (
+            <a
+              href={RESUME_PDF_URL}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
+                padding: "3rem 1.5rem", background: CARD, textDecoration: "none", textAlign: "center",
+              }}
+            >
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                <line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>
+              </svg>
+              <span style={{ fontSize: 15, fontWeight: 600, color: TEXT_PRIMARY }}>Tap to open the PDF</span>
+              <span style={{ fontSize: 13, color: TEXT_MUTED }}>1 page · opens in your phone's PDF viewer</span>
+            </a>
+          )}
         </div>
 
       </div>

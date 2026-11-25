@@ -1,4 +1,5 @@
 import { PF, SANS } from "../../data/content";
+import NavBar from "../shared/NavBar";
 
 const DARK = "#0d1117";
 const CARD = "#161b22";
@@ -6,7 +7,7 @@ const BORDER = "#21262d";
 const TEXT_PRIMARY = "#e6edf3";
 const TEXT_MUTED = "#8b949e";
 
-export default function ProjectDetail({ project, onBack }) {
+export default function ProjectDetail({ project, onBack, onNavigate }) {
   const c = project.coverColor;
 
   return (
@@ -15,7 +16,7 @@ export default function ProjectDetail({ project, onBack }) {
       {/* Sticky header */}
       <div style={{
         background: "#0d1117", borderBottom: `1px solid ${c}33`,
-        padding: "1rem 2.5rem", display: "flex", alignItems: "center", gap: 16,
+        padding: "1rem clamp(1rem, 5vw, 2.5rem)", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 16,
         position: "sticky", top: 0, zIndex: 1,
       }}>
         <button
@@ -35,9 +36,14 @@ export default function ProjectDetail({ project, onBack }) {
         </button>
         <div style={{ width: 8, height: 8, borderRadius: "50%", background: c, boxShadow: `0 0 8px ${c}` }} />
         <span style={{ fontFamily: PF, fontSize: 8, color: c, letterSpacing: "0.12em" }}>PROJECT.EXE</span>
+        {onNavigate && (
+          <div style={{ marginLeft: "auto" }}>
+            <NavBar activeId="projects" onNavigate={onNavigate} />
+          </div>
+        )}
       </div>
 
-      <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 2.5rem 5rem" }}>
+      <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2.5rem) 5rem" }}>
 
         {/* Hero cover image */}
         <div style={{ position: "relative", height: 260, overflow: "hidden", marginBottom: "2.5rem" }}>
@@ -159,7 +165,7 @@ export default function ProjectDetail({ project, onBack }) {
             {s.images && s.images.length > 0 && (
               <div style={{
                 display: "grid",
-                gridTemplateColumns: s.images.length === 1 && project.images[s.images[0]]?.fullWidth ? "1fr" : s.images.length === 1 ? "1fr" : "1fr 1fr",
+                gridTemplateColumns: s.images.length === 1 ? "1fr" : "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
                 gap: "0.875rem",
                 marginBottom: "1.25rem",
               }}>
@@ -180,7 +186,7 @@ export default function ProjectDetail({ project, onBack }) {
                     <div key={imgIdx} style={{
                       border: `1px solid ${BORDER}`,
                       borderRadius: 8, overflow: "hidden",
-                      height: isPaired ? 380 : (img.contain ? "auto" : 220),
+                      height: isPaired ? "clamp(240px, 50vw, 380px)" : (img.contain ? "auto" : 220),
                       minHeight: !isPaired && img.contain ? 180 : undefined,
                       background: DARK,
                       display: "flex", alignItems: "center", justifyContent: "center",

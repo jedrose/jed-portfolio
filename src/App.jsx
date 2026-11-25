@@ -2,20 +2,39 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import BootScreen      from "./components/BootScreen";
 import ArcadeCabinet   from "./components/ArcadeCabinet";
 import Sprite          from "./components/Sprite";
+import NavBar          from "./components/shared/NavBar";
 import AboutSection    from "./components/sections/AboutSection";
 import ProjectsSection from "./components/sections/ProjectsSection";
 import ResumeSection   from "./components/sections/ResumeSection";
 import ContactSection  from "./components/sections/ContactSection";
 import { createAudioCtx, playSelect } from "./utils/audio";
-import { PF, CABINETS, CAB_POSITIONS, CAB_CY, ROOM_W, ROOM_H, SPEED } from "./data/content";
+import { PF, CABINETS, CAB_POSITIONS, CAB_CY, ROOM_W, ROOM_H, SPEED, DEEP_PROJECTS } from "./data/content";
+
+// Routes live in the URL hash so any page can be linked directly:
+//   #/about  #/projects  #/projects/<project-id>  #/resume  #/contact
+const SECTION_IDS = CABINETS.map(c => c.id);
+
+function parseRoute() {
+  const [section, projectId] = window.location.hash.replace(/^#\/?/, "").split("/");
+  if (!SECTION_IDS.includes(section)) return { section: null, projectId: null };
+  const valid = section === "projects" && DEEP_PROJECTS.some(p => p.id === projectId);
+  return { section, projectId: valid ? projectId : null };
+}
+
+function routeTitle({ section, projectId }) {
+  if (projectId) return `${DEEP_PROJECTS.find(p => p.id === projectId).title} | Jed Roseman`;
+  if (section) return `${section[0].toUpperCase()}${section.slice(1)} | Jed Roseman`;
+  return "Jed Roseman";
+}
 
 function getScale() {
   return Math.min(window.innerWidth / ROOM_W, window.innerHeight / ROOM_H);
 }
 
 export default function App() {
-  const [booted,        setBooted]        = useState(false);
-  const [activeSection, setActiveSection] = useState(null);
+  const [route,         setRoute]         = useState(parseRoute);
+  // Deep links skip the intro and land straight on the content
+  const [booted,        setBooted]        = useState(() => parseRoute().section !== null);
   const [nearId,        setNearId]        = useState(null);
   const [spritePos,     setSpritePos]     = useState({ x: ROOM_W/2, y: ROOM_H*0.78 });
   const [spriteDir,     setSpriteDir]     = useState("down");
@@ -31,6 +50,26 @@ export default function App() {
   const audioRef     = useRef(null);
 
   useEffect(() => { audioRef.current = createAudioCtx(); }, []);
+
+  const activeSection = route.section;
+
+  // Push a new history entry so the browser back button walks back through pages
+  const navigate = useCallback(path => {
+    const target = path ? `#/${path}` : "";
+    if (target !== window.location.hash) {
+      window.history.pushState(null, "", target || window.location.pathname + window.location.search);
+    }
+    setRoute(parseRoute());
+  }, []);
+
+  useEffect(() => {
+    const onPop = () => setRoute(parseRoute());
+    window.addEventListener("popstate", onPop);
+    window.addEventListener("hashchange", onPop);
+    return () => { window.removeEventListener("popstate", onPop); window.removeEventListener("hashchange", onPop); };
+  }, []);
+
+  useEffect(() => { document.title = routeTitle(route); }, [route]);
 
   useEffect(() => {
     const onResize = () => setScale(getScale());
@@ -51,15 +90,15 @@ export default function App() {
       keysRef.current[e.code] = e.type === "keydown";
       if (e.type === "keydown" && (e.code === "Enter" || e.code === "Space")) {
         const near = getNear(posRef.current.x, posRef.current.y);
-        if (near && !activeSection) { playSelect(audioRef.current); setActiveSection(near); }
+        if (near && !activeSection) { playSelect(audioRef.current); navigate(near); }
       }
-      if (e.type === "keydown" && e.code === "Escape") setActiveSection(null);
+      if (e.type === "keydown" && e.code === "Escape" && activeSection) navigate(null);
       if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Space"].includes(e.code)) e.preventDefault();
     };
     window.addEventListener("keydown", onKey);
     window.addEventListener("keyup",   onKey);
     return () => { window.removeEventListener("keydown", onKey); window.removeEventListener("keyup", onKey); };
-  }, [booted, getNear, activeSection]);
+  }, [booted, getNear, activeSection, navigate]);
 
   useEffect(() => {
     if (!booted) return;
@@ -99,7 +138,9 @@ export default function App() {
   }, [booted, activeSection, getNear]);
 
   const activeCab = activeSection ? CABINETS.find(c => c.id === activeSection) : null;
-  const close = () => setActiveSection(null);
+  const close = () => navigate(null);
+  const goTo  = id => { playSelect(audioRef.current); navigate(id); };
+  const openProject = id => navigate(id ? `projects/${id}` : "projects");
 
   return (
     <div style={{
@@ -159,7 +200,7 @@ export default function App() {
             <ArcadeCabinet
               cab={cab}
               near={nearId === cab.id}
-              onEnter={() => { if (!activeSection) { playSelect(audioRef.current); setActiveSection(cab.id); }}}
+              onEnter={() => { if (!activeSection) goTo(cab.id); }}
             />
           </div>
         ))}
@@ -184,20 +225,19 @@ export default function App() {
             [ ENTER ] OPEN
           </div>
         )}
-
-        {/* Boot overlay */}
-        {!booted && (
-          <div style={{ position: "absolute", inset: 0, zIndex: 20 }}>
-            <BootScreen onDone={() => setBooted(true)} />
-          </div>
-        )}
       </div>
 
+      {/* Boot overlay — outside the scaled room so it renders at full size on phones */}
+      {!booted && <BootScreen onDone={() => setBooted(true)} />}
+
+      {/* Quick-jump nav, for visitors who'd rather not walk to a cabinet */}
+      {booted && !activeSection && <NavBar floating onNavigate={goTo} />}
+
       {/* Section overlays */}
-      {activeSection === "about"    && <AboutSection    color={activeCab.color} onClose={close} />}
-      {activeSection === "projects" && <ProjectsSection color={activeCab.color} onClose={close} />}
-      {activeSection === "resume"   && <ResumeSection   color={activeCab.color} onClose={close} />}
-      {activeSection === "contact"  && <ContactSection  color={activeCab.color} onClose={close} />}
+      {activeSection === "about"    && <AboutSection    color={activeCab.color} onClose={close} onNavigate={goTo} />}
+      {activeSection === "projects" && <ProjectsSection color={activeCab.color} onClose={close} onNavigate={goTo} openProjectId={route.projectId} onOpenProject={openProject} />}
+      {activeSection === "resume"   && <ResumeSection   color={activeCab.color} onClose={close} onNavigate={goTo} />}
+      {activeSection === "contact"  && <ContactSection  color={activeCab.color} onClose={close} onNavigate={goTo} />}
     </div>
   );
 }
