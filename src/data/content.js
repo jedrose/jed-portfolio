@@ -27,7 +27,7 @@ export const ALL_PROJECTS = [
       deepId: "pocket-radar",
       title: "Pocket Radar",
       year: "Fall 2026 - Now",
-      tags: ["ESP32-C6","C++","mmWave Radar","Embedded","I2C"],
+      tags: ["ESP32-C6","C++","mmWave Radar","Embedded","I2C","CAD"],
       status: "IN PROGRESS",
       desc: "A real-life take on the Call of Duty Heartbeat Sensor. A palm-sized 60 GHz radar that tracks people as live dots on a sweeping OLED screen, and reads heart and breathing rate when you sit still. XIAO ESP32-C6, Seeed MR60BHA2, U8g2.",
     },
@@ -136,16 +136,17 @@ export const DEEP_PROJECTS = [
     coverImage: "/pocket-radar-imgs/cover.jpg",
     coverPosition: "center 45%",
     category: "HARDWARE / EMBEDDED",
-    tags: ["ESP32-C6", "C++", "60 GHz mmWave", "U8g2", "I2C", "UART", "Embedded Systems"],
+    tags: ["ESP32-C6", "C++", "60 GHz mmWave", "U8g2", "I2C", "UART", "Embedded Systems", "CAD"],
     blurb: "A real-life Call of Duty Heartbeat Sensor. A 60 GHz mmWave sensor tracks people in the room and an OLED draws them as live dots on a sweeping radar display. Sit still close enough and it reads your heart and breathing rate too. Went from parts on a desk to a working display in one late-night build session.",
     context: "Personal project, started Fall 2026. The idea came from the Heartbeat Sensor in Call of Duty, the handheld that shows nearby players as blips on a little radar screen. I wanted to see how close real hardware could get, and how far the idea goes past a video game. The hardware is Seeed's MR60BHA2 kit, a 60 GHz radar module with a XIAO ESP32-C6 on the back, plus a Grove 1.12 inch 128x128 OLED on the kit's single Grove port. Firmware is Arduino C++ on top of Seeed's mmWave library and U8g2.",
-    techStack: ["Arduino C++", "XIAO ESP32-C6", "Seeed MR60BHA2 (60 GHz)", "SH1107 128x128 OLED", "U8g2", "Seeed mmWave library"],
+    techStack: ["Arduino C++", "XIAO ESP32-C6", "Seeed MR60BHA2 (60 GHz)", "SH1107 128x128 OLED", "U8g2", "Seeed mmWave library", "CadQuery (Python CAD)"],
     clientQuote: null,
     impact: [
       "16x faster display: moved the OLED from software I2C to the ESP32's hardware I2C at 400 kHz, taking it from 1 fps to 16 fps, close to the bus limit for a full 128x128 frame",
       "Live people tracking at about 8 updates a second, drawn on a 6 m radar sweep. Held a person sitting still at 1.6 m for over two and a half minutes without dropping them",
       "Tracked down a board that powered on but no computer could see: the kit has two USB-C ports, and only the one hidden inside the case carries data",
       "Gated the heart and breathing readout to only show after 3 seconds of stillness inside 1.5 m, since the radar reports junk numbers while you move",
+      "Designed a parametric handheld enclosure in Python (CadQuery) with an automatic fit check, and sized the radar window to half a wavelength at 60 GHz so the plastic stays close to invisible to the radar",
     ],
     images: [
       { src: "/pocket-radar-imgs/first-light.jpg", contain: true },    // 0 - first light, 1 fps
@@ -153,6 +154,9 @@ export const DEEP_PROJECTS = [
       { src: "/pocket-radar-imgs/vitals.jpg", contain: true },         // 2 - vitals locked in
       { src: "/pocket-radar-imgs/hold-still.jpg", contain: true },     // 3 - moving, hold still
       { src: "/pocket-radar-imgs/placement.jpg", contain: true },      // 4 - desk edge placement
+      { src: "/pocket-radar-imgs/enclosure-hero.jpg", contain: true },    // 5 - enclosure render, screen side
+      { src: "/pocket-radar-imgs/enclosure-front.jpg", contain: true },   // 6 - enclosure render, radar window
+      { src: "/pocket-radar-imgs/enclosure-cutaway.jpg", contain: true }, // 7 - labeled cutaway
     ],
     githubUrl: "https://github.com/jedrose/pocket-radar",
     sections: [
@@ -195,8 +199,18 @@ void loop() {
         images: [4],
       },
       {
+        heading: "Designing the Handheld",
+        body: "The whole point is to hold it out in front of you like the one in the game, so it needed a real enclosure. I modeled it in code with CadQuery, a Python CAD library, so every dimension is a variable and changing one regenerates the STEP and print files. The layout is a radar gun: radar straight out the front, screen on top tilted 35 degrees up toward your eyes, and a raked pistol grip holding an 18650 cell and a charge and boost board. A recess over the screen takes a green acrylic filter, since the OLED only lights up white. Two halves screw together on M3 heat-set inserts, and every feature inside is laid out to print with no interior supports. Before exporting anything, the script checks stand-ins for every part against the shell. Its first run caught two real problems: the battery bay was clipped short and the power board's corners hit the rounded grip walls.",
+        images: [5, 6],
+      },
+      {
+        heading: "Designing Around 60 GHz",
+        body: "The front of the case was the interesting part. Thin plastic is mostly transparent to radar, but every surface reflects a bit of the signal, and at 60 GHz the wavelength is only 5 mm, so a millimeter either way matters. TI's radome design guide gives two rules. Make the plastic a whole number of half wavelengths thick, measured inside the material, so the reflections off its front and back cancel out. And keep it a half wavelength from the antenna, which is 2.5 mm in air. Inside PLA the wavelength shrinks to about 3 mm, so the window is a 1.5 mm plate with a 2.5 mm air gap behind it. I made it a separate part on purpose: swapping plates lets me test no window, 1.5 mm, and 3 mm back to back and see what each one actually does to range, without reprinting the whole case.",
+        images: [7],
+      },
+      {
         heading: "Where It Stands",
-        body: "It works on USB power: the sweep, live dots, target count and distance, and vitals when you hold still. Next up is a handheld enclosure with a grip and a battery, so it actually feels like the one in the game. After that: a proper walk test out to 3 to 4 m, and probably a color OLED. The current screen can only light up white, and a green radar with a fading phosphor trail is the whole point.",
+        body: "It works on USB power: the sweep, live dots, target count and distance, and vitals when you hold still. The enclosure is designed but not printed yet. A few numbers in the model are still estimates from datasheets, like how deep the radar and XIAO stack sits behind the board, so I am measuring the real hardware before the first print. After that: the radome test, a proper walk test out to 3 to 4 m, and probably a color OLED. The current screen can only light up white, and a green radar with a fading phosphor trail is the whole point.",
       },
     ],
   },
